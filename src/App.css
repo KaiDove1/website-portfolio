@@ -172,18 +172,9 @@ img {
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
-  .container {
-    margin-left: var(--mb-1-5);
-    margin-right: var(--mb-1-5);
-  }
-
-  .button {
-    padding: 1rem 1.75rem;
-  }
-
-  .button__icon {
-    width: 22px;
-    height: 22px;
+  .home__content{
+    grid-template-columns: 100px repeat(2, 1fr);
+    column-gap: 1.25r;
   }
 }
 
@@ -216,3 +207,5 @@ img {
     margin-right: var(--mb-1);
   }
 }
+
+
