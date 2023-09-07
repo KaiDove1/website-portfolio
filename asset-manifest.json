@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/website-portfolio/static/css/main.31a6bc70.css",
+    "main.js": "/website-portfolio/static/js/main.a168980a.js",
+    "static/js/787.723214ac.chunk.js": "/website-portfolio/static/js/787.723214ac.chunk.js",
+    "static/media/Resume - Kai Dove.pdf": "/website-portfolio/static/media/Resume - Kai Dove.a41d782912645685262a.pdf",
+    "static/media/head_shot_grey.jpg": "/website-portfolio/static/media/head_shot_grey.23e6ebde3dea5ec91d28.jpg",
+    "index.html": "/website-portfolio/index.html",
+    "main.31a6bc70.css.map": "/website-portfolio/static/css/main.31a6bc70.css.map",
+    "main.a168980a.js.map": "/website-portfolio/static/js/main.a168980a.js.map",
+    "787.723214ac.chunk.js.map": "/website-portfolio/static/js/787.723214ac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31a6bc70.css",
+    "static/js/main.a168980a.js"
+  ]
+}
