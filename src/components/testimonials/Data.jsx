@@ -1,25 +1,25 @@
-import Image1 from "../../assets/testimonial1.png"
-import Image2 from "../../assets/testimonial2.png"
-import Image3 from "../../assets/testimonial3.png"
+import Image1 from "../../assets/chatgpt.png"
+import Image2 from "../../assets/file_storage.png"
+import Image3 from "../../assets/twitter.png"
 
 export const Data = [
     {
         id: 1,
         image: Image1,
-        title: 'Jhon Doe',
-        description: 'John Doe says, blah blah blah',
+        title: 'ChatGPT',
+        description: 'Implementing ChatGPT into this web application for auto-finished text responses',
     },
     {
         id: 2,
         image: Image2,
-        title: 'Jhon Doe2',
-        description: 'John Doe2 says, blah blah blah',
+        title: 'Creating another project',
+        description: 'Creating a file organization system to organize files and folders',
     },
     {
         id: 3,
         image: Image3,
-        title: 'Jhon Doe3',
-        description: 'John Doe3 says, blah blah blah',
+        title: 'Social Media',
+        description: 'Pulling recenbt social media posts into a recent social media feed',
     }
 
 ]

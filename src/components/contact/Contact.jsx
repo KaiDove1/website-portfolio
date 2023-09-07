@@ -22,7 +22,7 @@ const Contact = () => {
 
             <div className="contact__container container grid">
                 <div className="contact__content">
-                    <h3 className="contact__title">Talk to me</h3>
+                    <h3 className="contact__title">Through...</h3>
 
                     <div className="contact__info">
                         <div className="contact__card">
@@ -31,17 +31,18 @@ const Contact = () => {
                             <h3 className="contact__card-title">Email</h3>
                             <span className="contact__card-data">ybr8ff@virginia.edu</span>
 
-                            <a href="mailto:ybr8ff@virginia.edu" className="contact__button">Write me{" "}
+                            <a href="mailto:ybr8ff@virginia.edu" className="contact__button">Message me
                                 <i className="bx bx-right-arrow-alt contact__button-icon"></i></a>
                         </div>
 
                         <div className="contact__card">
-                            <i className="bx bxl-whatsapp contact__card-icon"></i>
+                            <i className="bx bxl-linkedin-square contact__card-icon"></i>
+                         
 
-                            <h3 className="contact__card-title">Messages</h3>
-                            <span className="contact__card-data">571-533-7802</span>
+                            <h3 className="contact__card-title">LinkedIn</h3>
+                            <span className="contact__card-data">kai-dove</span>
 
-                            <a href="" className="contact__button">Write me {" "}<i className="bx bx-right-arrow-alt contact__button-icon"></i></a>
+                            <a href="https://www.linkedin.com/in/kai-dove-5b02b2243/" target="_blank" rel="noopener noreferrer" className="contact__button">Message me <i className="bx bx-right-arrow-alt contact__button-icon"></i></a>
                         </div>
 
                         <div className="contact__card">
@@ -50,13 +51,13 @@ const Contact = () => {
                             <h3 className="contact__card-title">Messenger</h3>
                             <span className="contact__card-data">Kai_Dove</span>
 
-                            <a href="https://www.facebook.com/Kai2004/" className="contact__button">Write me {" "}<i className="bx bx-right-arrow-alt contact__button-icon"></i></a>
+                            <a href="https://www.facebook.com/Kai2004/" target="_blank" rel="noopener noreferrer" className="contact__button">Message me <i className="bx bx-right-arrow-alt contact__button-icon"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <div className="contact__content">
-                    <h3 className="contact__title">Write me your project</h3>
+                    <h3 className="contact__title">Contact Me Easily...</h3>
 
                     <form ref={form} onSubmit={sendEmail} className="contact__form">
                         <div className="contact__form-div">

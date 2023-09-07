@@ -40,8 +40,8 @@
 }
 
 .about__description{
-    padding: 0 4rem 0 0;
-    margin-bottom: var(--mb-0-5)
+    padding: 0 4rem 0 10;
+    margin-bottom: var(--mb-2-5)
 }
 
 /*=============== BREAKPOINTS ===============*/
@@ -71,6 +71,20 @@
     .about__description{
         padding: 0 5rem;
         margin-bottom: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 768px){
+
+    body{
+        margin: 0 0 var(--header-height) 0 ;
+    }
+    .section{
+        padding: 2rem 0 4rem;
+    }
+
+    .section__subtitle{
+        margin-bottom: var(--mb-3);
     }
   }
   

@@ -6,20 +6,20 @@ const Info = () => {
         
         <div className="about__box">
         <i class='bx bx-award about__icon'></i>
-            <h3 className="about__title">Experience</h3>
-            <span className="about_subtitle"> List Experiences</span>
+            <h3 className="about__title">Past Positions</h3>
+            <span className="about__subtitle">President of SHS</span>
         </div>
 
         <div className="about__box">
-        <i class='bx bx-briefcase-alt about_icon' ></i>
+        <i class='bx bx-briefcase-alt about__icon' ></i>
             <h3 className="about__title">Completed</h3>
-            <span className="about_subtitle">5 Projects</span>
+            <span className="about__subtitle">6 Projects</span>
         </div>
 
         <div className="about__box">
-        <i class='bx bx-support about__icon' ></i>
-            <h3 className="about__title">Support</h3>
-            <span className="about_subtitle">Online 24/7</span>
+        <i class='bx bxs-graduation about__icon' ></i>
+            <h3 className="about__title">Student</h3>
+            <span className="about__subtitle">@ UVA</span>
         </div>
 
 

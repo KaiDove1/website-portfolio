@@ -13,14 +13,15 @@ import { Pagination } from 'swiper/modules';
 
 const Testimonials = () => {
     return (
-        <section className="testimonails container section">
-            <h2 className="section__title">My clients say</h2>
-            <span className="section__subtitle">Testimonial</span>
+        <section className="testimonails container section" id="future">
+            <h2 className="section__title">Future Plans or Ideas</h2>
+            <span className="section__subtitle">Gallery/Future/Features</span>
 
             <Swiper className="testimonials__container"
                 loop={true}
                 grabCursor={true}
                 spaceBetween={24}
+                slidesPerView={1}
                 pagination={{
                     clickable: true,
                 }}
@@ -35,6 +36,7 @@ const Testimonials = () => {
 
                 }}
                 modules={[Pagination]}
+                threshold={0}
             >
                 {Data.map(({ id, image, title, description }) => {
                     return (

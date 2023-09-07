@@ -8,7 +8,7 @@ const Frontend = () => {
             <div className="skills__box">
                 <div className="skills__group">
                     <div className="skills__data">
-                        <i class='bx bx-badge-check'></i>
+                        <i class='bx bxl-python'></i>
 
                         <div>
                             <h3 className="skills__name">Python</h3>
@@ -17,7 +17,7 @@ const Frontend = () => {
                     </div>
 
                     <div className="skills__data">
-                        <i className='bx bx-badge-check'></i>
+                        <i class='bx bxl-java' ></i>
 
                         <div>
                             <h3 className="skills__name">Java</h3>
@@ -26,16 +26,26 @@ const Frontend = () => {
                     </div>
 
                     <div className="skills__data">
-                        <i class='bx bx-badge-check'></i>
+                        <i class='bx bxl-html5' ></i>
 
                         <div>
-                            <h3 className="skills__name">HTML/CSS</h3>
+                            <h3 className="skills__name">HTML</h3>
                             <span className="skills__level">Advanced</span>
                         </div>
                     </div>
 
                     <div className="skills__data">
-                        <i class='bx bx-badge-check'></i>
+                        <i class='bx bxl-css3' ></i>
+
+                        <div>
+                            <h3 className="skills__name">CSS</h3>
+                            <span className="skills__level">Advanced</span>
+                        </div>
+                    </div>
+
+
+                    <div className="skills__data">
+                        <i class='bx bxl-typescript' ></i>
 
                         <div>
                             <h3 className="skills__name">TypeScript</h3>
@@ -44,7 +54,7 @@ const Frontend = () => {
                     </div>
 
                     <div className="skills__data">
-                        <i className='bx bx-badge-check'></i>
+                        <i class='bx bxl-javascript' ></i>
 
                         <div>
                             <h3 className="skills__name">JavaScript</h3>
@@ -53,7 +63,7 @@ const Frontend = () => {
                     </div>
 
                     <div className="skills__data">
-                        <i className='bx bx-badge-check'></i>
+                        <i class='bx bx-data' ></i>
 
                         <div>
                             <h3 className="skills__name">SQL</h3>
@@ -62,10 +72,10 @@ const Frontend = () => {
                     </div>
 
                     <div className="skills__data">
-                        <i className='bx bx-badge-check'></i>
+                        <i class='bx bxl-c-plus-plus' ></i>
 
                         <div>
-                            <h3 className="skills__name">Ruby</h3>
+                            <h3 className="skills__name">C++</h3>
                             <span className="skills__level">Basic</span>
                         </div>
                     </div>
