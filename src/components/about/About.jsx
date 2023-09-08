@@ -1,7 +1,7 @@
 import React from 'react';
 import "./about.css";
 import head_shot from "../../assets/head_shot_grey.jpg";
-import CV from "../../assets/Resume - Kai Dove.pdf"; 
+import CV from "../../assets/Resume - Kai Dove .pdf"; 
 import Info from './Info';
 
 const About = () => {
