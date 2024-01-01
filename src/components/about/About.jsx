@@ -3,12 +3,13 @@ import "./about.css";
 import head_shot from "../../assets/head_shot_grey.jpg";
 import CV from "../../assets/Resume - Kai Dove .pdf"; 
 import Info from './Info';
+import content from 'src\content.json';
 
 const About = () => {
   return (
     <section className="about section" id="about">
-        <h2 className="section__title">About Me</h2>
-        <span className="section__subtitle">My Introduction</span>
+        <h2 className="section__title">HELLO{content.About.title}</h2>
+        <span className="section__subtitle">{content.About.subtitle}</span>
 
         <div className="about__container container grid ">
             <img src={head_shot} alt="" className="about__img" />
@@ -16,10 +17,9 @@ const About = () => {
             <div className="about__data">
                 <Info />
 
-                <p className="about__description">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am a second-year student majoring Computer Science at the University of Virginia, pursuing a future in software engineering. 
-                In between my studies, I enjoy bringing personal projects to life. Stay connected to track my progress and the innovative projects unfolding along the way.</p>
+                <p className="about__description">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{content.About.description}</p>
 
-                <a download="" href={CV} className="button button--flex">Download CV
+                {/* <a download="" href={CV} className="button button--flex">Download CV
                     <svg
                 class="button__icon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ const About = () => {
                   fill="var(--container-color)"
                 ></path>
                     </svg>
-                </a>
+                </a> */}
             </div>
         </div>
         

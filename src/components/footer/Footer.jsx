@@ -17,7 +17,11 @@ const Footer = () => {
                     </li>
 
                     <li>
+<<<<<<< HEAD
                         <a href="#future" className="footer__link">Future</a>
+=======
+                        <a href="#contact" className="footer__link">Contact</a>
+>>>>>>> 5c60561cbc3966359c91e39b848dfe6c603065eb
                     </li>
                 </ul>
 

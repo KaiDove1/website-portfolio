@@ -19,7 +19,7 @@ export const Data = [
         id: 3,
         image: Image3,
         title: 'Social Media',
-        description: 'Pulling recenbt social media posts into a recent social media feed',
+        description: 'Pulling recent social media posts into a webiste social media feed',
     }
 
 ]
