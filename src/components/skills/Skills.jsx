@@ -1,7 +1,7 @@
 
 import './skills.css';
-import Backend from './Backend';
-import Frontend from './Frontend';
+import Tools from './Tools';
+import Langugaes from './Langugaes';
 
 
 const Skills = () => {
@@ -11,8 +11,8 @@ const Skills = () => {
       <span className="section__subtitle">My Skillset...</span>
 
       <div className="skills__container container grid">
-        <Frontend />
-        <Backend />
+        <Langugaes />
+        <Tools />
 
       </div>
     </section>

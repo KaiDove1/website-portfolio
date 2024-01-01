@@ -17,29 +17,26 @@ const Footer = () => {
                     </li>
 
                     <li>
-<<<<<<< HEAD
-                        <a href="#future" className="footer__link">Future</a>
-=======
                         <a href="#contact" className="footer__link">Contact</a>
->>>>>>> 5c60561cbc3966359c91e39b848dfe6c603065eb
                     </li>
                 </ul>
 
                 <div className="footer__social">
-                    <a href="https://www.facebook.com/Kai2004/" className="footer__social-link" target="_blank">
+                    <a href="https://www.facebook.com/Kai2004/" className="footer__social-link" target="_blank" rel="noopener noreferrer">
                         <i className="bx bxl-facebook"></i>
                     </a>
 
-                    <a href="https://www.instagram.com/kai.dove/" className="footer__social-link" target="_blank">
+                    <a href="https://www.instagram.com/kai.dove/" className="footer__social-link" target="_blank" rel="noopener noreferrer">
                         <i className="bx bxl-instagram"></i>
                     </a>
 
-                    <a href="https://twitter.com/scanningkai" className="footer__social-link" target="_blank">
+                    <a href="https://twitter.com/scanningkai" className="footer__social-link" target="_blank" rel="noopener noreferrer">
                         <i className="bx bxl-twitter"></i>
                     </a>
                 </div>
 
-                <span className='footer__copy'>&#169; KaiDove. All rights reserved</span>
+
+                <span className='footer__copy'>&#169; KaiDove. All rights reserved  v1.07</span>
             </div>
         </footer>
     )

@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import "./projects.css"
+import content from '../../content.json';
 
 const Services = () => {
     const [toggleState, setToggleState] = useState(0);
+    const project1 = content.projects[0];
+    const project2 = content.projects[1];
+    const project3 = content.projects[2];
 
     const toggleTab = (index) => {
         setToggleState(index);
@@ -15,10 +19,18 @@ const Services = () => {
             <span className="section__subtitle">Most relevant projects...</span>
 
             <div className="services__container container grid">
+                {/* Project 1 */}
                 <div className="services__content">
                     <div>
                         <i className="bx bx-barcode-reader services__icon"></i>
-                        <h3 className="services__title">Product <br />Identification Project</h3>
+                        <h3 className="services__title">
+                            {project1.outsidetitle.split('\\n').map((line, index) => (
+                                <React.Fragment key={index}>
+                                    {line}
+                                    {index < project1.outsidetitle.split('\\n').length - 1 && <br />}
+                                </React.Fragment>
+                            ))}
+                        </h3>
                     </div>
 
                     <span className="services__button" onClick={() => toggleTab(1)}>More Details
@@ -29,28 +41,35 @@ const Services = () => {
                             
                             <i onClick={() => toggleTab(0)} className="uil uil-times services__modal-close"></i>
 
-                            <h3 className="services__modal-title">Product Identification Project</h3>
-                            <p className="services__modal-description">Tools and Technologies used: <br />TensorFlow, Python, HTML & CSS</p>
+                            <h3 className="services__modal-title">{project1.insideTitle}</h3>
+                            <p className="services__modal-description">
+                                {project1.description.split('\\n').map((line, index) => (
+                                    <React.Fragment key={index}>
+                                        {line}
+                                        {index < project1.description.split('\\n').length - 1 && <br />}
+                                    </React.Fragment>
+                                ))}
+                            </p>
                             <ul className="services__modal-services grid">
                                 <li className="services__modal-service">
 
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Created a streamlined web interface for simple image uploads and quick product identification.</p>
+                                    <p className="services__modal-info">{project1.details[0]}</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Attained significant benchmarks in accuracy and system performance.</p>
+                                    <p className="services__modal-info">{project1.details[1]}</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Successfully managed and completed the project individually from March to June 2023.</p>
+                                    <p className="services__modal-info">{project1.details[2]}</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Identifies products within an impressive average time frame of 1.5 seconds, greatly enhancing the overall efficiency and user satisfaction.</p>
+                                    <p className="services__modal-info">{project1.details[3]}</p>
                                 </li>
                             </ul>
                         </div>
@@ -60,7 +79,15 @@ const Services = () => {
                 <div className="services__content">
                     <div>
                         <i className="bx bx-mobile-alt services__icon"></i>
-                        <h3 className="services__title">Individual Mobile<br /> App Project<br /></h3>
+                        <h3 className="services__title">
+                            {project2.outsidetitle.split('\\n').map((line, index, array) => (
+                                <React.Fragment key={index}>
+                                    {line}
+                                    {index < array.length - 1 && <br />}
+                                </React.Fragment>
+                            ))}
+                        </h3>
+
                     </div>
 
                     <span onClick={() => toggleTab(2)} className="services__button">More Details
@@ -70,27 +97,43 @@ const Services = () => {
                         <div className="services__modal-content">
                             <i onClick={() => toggleTab(0)} className="uil uil-times services__modal-close"></i>
 
-                            <h3 className="services__modal-title">Individual Mobile<br /> App Project</h3>
-                            <p className="services__modal-description">Tools and Technologies used: <br />Unity3D, JavaScript, FireBase</p>
+                            <h3 className="services__modal-title">
+                                {project2.insideTitle.split('\\n').map((line, index, array) => (
+                                    <React.Fragment key={index}>
+                                        {line}
+                                        {index < array.length - 1 && <br />}
+                                    </React.Fragment>
+                                ))}
+                            </h3>
+
+                            <p className="services__modal-description">
+                                {project2.description.split('\\n').map((line, index, array) => (
+                                    <React.Fragment key={index}>
+                                        {line}
+                                        {index < array.length - 1 && <br />}
+                                    </React.Fragment>
+                                ))}
+                            </p>
+
                             <ul className="services__modal-services grid">
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Creation of an immersive tycoon-style mobile app.</p>
+                                    <p className="services__modal-info">{project2.details[0]}</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Implemented a backend system resulting in efficient data storage and retrieval processes</p>
+                                    <p className="services__modal-info">{project2.details[1]}</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Built a in-game currency system that utilizes the back-end system.</p>
+                                    <p className="services__modal-info">{project2.details[2]}</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Built around the "7 Deadly Sins" theme created from my own creativity</p>
+                                    <p className="services__modal-info">{project2.details[3]}</p>
                                 </li>
                             </ul>
                         </div>
@@ -100,7 +143,14 @@ const Services = () => {
                 <div className="services__content">
                     <div>
                         <i className="bx bxl-twitter services__icon"></i>
-                        <h3 className="services__title">ML Cancer Segmentation</h3>
+                        <h3 className="services__title">
+                            {project3.outsidetitle.split('\\n').map((line, index, array) => (
+                                <React.Fragment key={index}>
+                                    {line}
+                                    {index < array.length - 1 && <br />}
+                                </React.Fragment>
+                            ))}
+                        </h3>
                     </div>
 
                     <span onClick={() => toggleTab(3)} className="services__button">More Details
@@ -110,22 +160,29 @@ const Services = () => {
                         <div className="services__modal-content">
                             <i onClick={() => toggleTab(0)} className="uil uil-times services__modal-close"></i>
 
-                            <h3 className="services__modal-title">Twitter Replica</h3>
-                            <p className="services__modal-description">Tools and Technologies used: <br />Uvicorn, Numpy, Python, FastAPI, Tensorflow</p>
+                            <h3 className="services__modal-title">{project3.insideTitle}</h3>
+                            <p className="services__modal-description">
+                                {project3.description.split('\\n').map((line, index) => (
+                                    <React.Fragment key={index}>
+                                        {line}
+                                        {index < project1.description.split('\\n').length - 1 && <br />}
+                                    </React.Fragment>
+                                ))}
+                            </p>
                             <ul className="services__modal-services grid">
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Employs a variety of layers like Conv2D, MaxPooling2D, and Conv2DTranspose, along with Dropout for regularization.</p>
+                                    <p className="services__modal-info">{project3.details[0]}</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">FastAPI is used for the web backend, allowing for easy deployment and API endpoint creation.</p>
+                                    <p className="services__modal-info">{project3.details[1]}</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Additional libraries like OpenCV and NumPy are used for image manipulation, while the dependencies are managed with specific version numbers.</p>
+                                    <p className="services__modal-info">{project3.details[2]}</p>
                                 </li>
 
                             </ul>

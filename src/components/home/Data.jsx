@@ -1,11 +1,13 @@
 import React from 'react'
+import content from '../../content.json';
 
 const Data = () => {
+  const biograph = content.Biograph;
   return (
     <div className="home__data">
-      <h1 className="home__title">Kai  Dove</h1>
-      <h3 className="home__subtitle">Software Engineer</h3>
-      <p className="home__description">I am currently pursuing my undergraduate studies at the University of Virginia, with a aspiration to forge a successful career as a software engineer :)</p>
+      <h1 className="home__title">{biograph.title}</h1>
+      <h3 className="home__subtitle">{biograph.subtitle}</h3>
+      <p className="home__description">{biograph.description}</p>
 
       <a href="#contact" className="button button--flex">
         Say Hello

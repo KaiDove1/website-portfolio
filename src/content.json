@@ -1,8 +1,110 @@
 {
-    "About": {
-        "title": "LMAOAMOA",
-        "subtitle": "My",
-        "description": "I am a second-year student majoring in Computer Science at the University of Virginia, pursuing a future in software engineering. In between my studies, I enjoy bringing personal projects to life. Stay connected to track my progress and the innovative projects unfolding along the way."
-      }
-    
+  "Header": {
+    "logoText": "Kai",
+    "navLocation1": "Home",
+    "navLocation2": "About",
+    "navLocation3": "Skills",
+    "navLocation4": "Projects",
+    "navLocation5": "Future Ideas",
+    "navLocation6": "Contact"
+  },
+  "Biograph":{
+    "title": "Kai Dove",
+    "subtitle": "Software Engineer",
+    "description": "I am currently pursuing my undergraduate studies at the University of Virginia, with a aspiration to forge a successful career as a software engineer"
+  },
+  "About": {
+    "title": "About Me",
+    "subtitle": "My Introduction",
+    "description": "I am a second-year student majoring in Computer Science at the University of Virginia, pursuing a future in software engineering. In between my studies, I enjoy bringing personal projects to life. Stay connected to track my progress and the innovative projects unfolding along the way."
+  },
+  "Info": {
+    "positionsTitle": "Past Positions",
+    "positionsSubtitle": "President of SHS",
+    "completedTitle": "Completed",
+    "completedSubtitle": "6 Projects",
+    "studentTitle": "Student",
+    "studentSubtitle": "@ UVA"
+  },
+  "Langugaes": {
+    "Programming Languages": {
+      "title1": "Python", 
+      "level1": "Expert",
+      "title2": "Java", 
+      "level2": "Advanced",
+      "title3": "HTML", 
+      "level3": "Advanced",
+      "title4": "CSS", 
+      "level4": "Advanced" ,
+      "title5": "TypeScript", 
+      "level5": "Advanced" ,
+      "title6": "JavaScript", 
+      "level6": "Intermediate" ,
+      "title7": "SQL", 
+      "level7": "Intermediate" ,
+      "title8": "C++", 
+      "level8": "Basic" 
+    }
+  },
+  "ToolsAndTechnologies": {
+    "Tools": {
+      "title1": "Git",
+      "level1": "Expert",
+      "title2": "VScode",
+      "level2": "Expert",
+      "title3": "Tensorflow",
+      "level3": "Expert",
+      "title4": "PyCharm",
+      "level4": "Advanced",
+      "title5": "Matlab",
+      "level5": "Advanced",
+      "title6": "Firebase",
+      "level6": "Advanced",
+      "title7": "React/Node.js",
+      "level7": "Advanced",
+      "title8": "Slack",
+      "level8": "Advanced"
+    }
+  },
+  "projects": [
+    {
+      "id": 1,
+      "icon": "bx bx-barcode-reader",
+      "outsidetitle": "Product \\nIdentification Project",
+      "insideTitle": "Product \\nIdentification Project",
+      "description": "Tools and Technologies used: \\nTensorFlow, Python, HTML & CSS",
+      "details": [
+        "Created a streamlined web interface for simple image uploads and quick product identification.",
+        "Attained significant benchmarks in accuracy and system performance.",
+        "Successfully managed and completed the project individually from March to June 2023.",
+        "Identifies products within an impressive average time frame of 1.5 seconds, greatly enhancing the overall efficiency and user satisfaction."
+      ]
+    },
+    {
+      "id": 2,
+      "icon": "bx bx-mobile-alt",
+      "outsidetitle": "Individual Mobile \\nApp Project",
+      "insideTitle": "Individual Mobile App Project",
+      "description": "Tools and Technologies used: \\nUnity3D, JavaScript, Firebase",
+      "details": [
+        "Creation of an immersive tycoon-style mobile app.",
+        "Implemented a backend system resulting in efficient data storage and retrieval processes.",
+        "Built a in-game currency system that utilizes the back-end system.",
+        "Built around the '7 Deadly Sins' theme created from my own creativity."
+      ]
+    },
+    {
+      "id": 3,
+      "icon": "bx bxl-twitter",
+      "outsidetitle": "ML Cancer \\nSegmentation",
+      "insideTitle": "Twitter Replica",
+      "description": "Tools and Technologies used: Uvicorn, Numpy, Python, FastAPI, Tensorflow",
+      "details": [
+        "Employs a variety of layers like Conv2D, MaxPooling2D, and Conv2DTranspose, along with Dropout for regularization.",
+        "FastAPI is used for the web backend, allowing for easy deployment and API endpoint creation.",
+        "Additional libraries like OpenCV and NumPy are used for image manipulation, while the dependencies are managed with specific version numbers."
+      ]
+    }
+  ]
+  
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import "./about.css";
 import head_shot from "../../assets/head_shot_grey.jpg";
-import CV from "../../assets/Resume - Kai Dove .pdf"; 
+// import CV from "../../assets/Resume - Kai Dove .pdf"; 
 import Info from './Info';
-import content from 'src\content.json';
+import content from './../../content.json';
 
 const About = () => {
   return (
     <section className="about section" id="about">
-        <h2 className="section__title">HELLO{content.About.title}</h2>
+        <h2 className="section__title">{content.About.title}</h2>
         <span className="section__subtitle">{content.About.subtitle}</span>
 
         <div className="about__container container grid ">
