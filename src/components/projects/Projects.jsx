@@ -100,7 +100,7 @@ const Services = () => {
                 <div className="services__content">
                     <div>
                         <i className="bx bxl-twitter services__icon"></i>
-                        <h3 className="services__title">Twitter <br />Replica</h3>
+                        <h3 className="services__title">ML Cancer Segmentation</h3>
                     </div>
 
                     <span onClick={() => toggleTab(3)} className="services__button">More Details
@@ -111,27 +111,23 @@ const Services = () => {
                             <i onClick={() => toggleTab(0)} className="uil uil-times services__modal-close"></i>
 
                             <h3 className="services__modal-title">Twitter Replica</h3>
-                            <p className="services__modal-description">Tools and Technologies used: <br />React, JavaScript, HTML, CSS, FireBase</p>
+                            <p className="services__modal-description">Tools and Technologies used: <br />Uvicorn, Numpy, Python, FastAPI, Tensorflow</p>
                             <ul className="services__modal-services grid">
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Created with the HackCville group taught by the class: Source</p>
+                                    <p className="services__modal-info">Employs a variety of layers like Conv2D, MaxPooling2D, and Conv2DTranspose, along with Dropout for regularization.</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Successfully implemented user authentication and real-time updates on the platform</p>
+                                    <p className="services__modal-info">FastAPI is used for the web backend, allowing for easy deployment and API endpoint creation.</p>
                                 </li>
 
                                 <li className="services__modal-service">
                                     <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Utilized a blend of React, JavaScript, HTML, and CSS to craft a responsive interface</p>
+                                    <p className="services__modal-info">Additional libraries like OpenCV and NumPy are used for image manipulation, while the dependencies are managed with specific version numbers.</p>
                                 </li>
 
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">Integrated a dynamic feature that enabled real-time updates on both the Twitter replica and To-Do list components</p>
-                                </li>
                             </ul>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ const Backend = () => {
                         <i class='bx bx-search-alt' ></i>
 
                         <div>
-                            <h3 className="skills__name">IntelliJ</h3>
+                            <h3 className="skills__name">Tensorflow</h3>
                             <span className="skills__level">Expert</span>
                         </div>
                     </div>
