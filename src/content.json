@@ -20,7 +20,7 @@
   },
   "Info": {
     "positionsTitle": "Past Positions",
-    "positionsSubtitle": "President of SHS",
+    "positionsSubtitle": "...",
     "completedTitle": "Completed",
     "completedSubtitle": "6 Projects",
     "studentTitle": "Student",
@@ -43,26 +43,26 @@
       "title7": "SQL", 
       "level7": "Intermediate" ,
       "title8": "C++", 
-      "level8": "Basic" 
+      "level8": "Intermediate" 
     }
   },
   "ToolsAndTechnologies": {
     "Tools": {
       "title1": "Git",
       "level1": "Expert",
-      "title2": "VScode",
+      "title2": "Django",
       "level2": "Expert",
       "title3": "Tensorflow",
       "level3": "Expert",
-      "title4": "PyCharm",
+      "title4": "Laravel",
       "level4": "Advanced",
-      "title5": "Matlab",
+      "title5": "Selenium",
       "level5": "Advanced",
       "title6": "Firebase",
       "level6": "Advanced",
       "title7": "React/Node.js",
       "level7": "Advanced",
-      "title8": "Slack",
+      "title8": "PostGre",
       "level8": "Advanced"
     }
   },

@@ -9,24 +9,23 @@ const Backend = () => {
 
             <div className="skills__box">
                 <div className="skills__group">
+                    {/* ------------------------------------------------------- */}
                     <div className="skills__data">
                         <i class='bx bxl-github' ></i>
-
                         <div>
                             <h3 className="skills__name">{toolsData.title1}</h3>
                             <span className="skills__level">{toolsData.level1}</span>
                         </div>
                     </div>
-
+                    {/* ------------------------------------------------------- */}
                     <div className="skills__data">
-                        <i class='bx bxl-visual-studio' ></i>
-
+                        <i class='bx bxl-django'></i>
                         <div>
                             <h3 className="skills__name">{toolsData.title2}</h3>
                             <span className="skills__level">{toolsData.level2}</span>
                         </div>
                     </div>
-
+                    {/* ------------------------------------------------------- */}
                     <div className="skills__data">
                         <i class='bx bx-search-alt' ></i>
 
@@ -36,8 +35,9 @@ const Backend = () => {
                         </div>
                     </div>
 
+                    {/* ------------------------------------------------------- */}
                     <div className="skills__data">
-                        <i class='bx bxl-python' ></i>
+                        <i class='bx bxl-php' ></i>
 
                         <div>
                             <h3 className="skills__name">{toolsData.title4}</h3>
@@ -45,8 +45,9 @@ const Backend = () => {
                         </div>
                     </div>
 
+                    {/* ------------------------------------------------------- */}
                     <div className="skills__data">
-                        <i class='bx bx-math' ></i>
+                        <i class='bx bx-selection' ></i>
 
                         <div>
                             <h3 className="skills__name">{toolsData.title5}</h3>
@@ -54,6 +55,7 @@ const Backend = () => {
                         </div>
                     </div>
 
+                    {/* ------------------------------------------------------- */}
                     <div className="skills__data">
                         <i class='bx bxl-firebase' ></i>
 
@@ -63,6 +65,7 @@ const Backend = () => {
                         </div>
                     </div>
 
+                    {/* ------------------------------------------------------- */} 
                     <div className="skills__data">
                         <i class='bx bxl-react' ></i>
 
@@ -72,8 +75,9 @@ const Backend = () => {
                         </div>
                     </div>
 
+                    {/* ------------------------------------------------------- */}        
                     <div className="skills__data">
-                        <i class='bx bxl-slack' ></i>
+                        <i class='bx bxl-postgresql' ></i>
 
                         <div>
                             <h3 className="skills__name">{toolsData.title8}</h3>
