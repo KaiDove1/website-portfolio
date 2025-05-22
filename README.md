@@ -1,30 +1,56 @@
+# Personal Portfolio Website
 
-# Project Name:
-Website Portfolio
+A modern, responsive portfolio website built with React.js showcasing my projects, skills, and experience.
 
-## Description:
-Website Portfolio is a personal portfolio website designed to showcase my projects, skills, and experience. It's built with React and is designed to be responsive and accessible across various devices and screen sizes.
+## Features
 
-## Features:
+- Responsive design
+- Project showcase
+- Skills and experience sections
+- Contact form using EmailJS
+- Modern UI with Swiper.js for carousels
 
-Responsive Design: Adapts to various screen sizes and devices.
-Portfolio Showcase: Highlights my most significant projects with descriptions, images, and links.
-About Section: A personal introduction and professional summary.
-Contact Form: Allows visitors to easily get in touch.
-Interactive Elements: Enhances user engagement with interactive components.
+## Technologies Used
 
-## Installation:
-To set up this project locally, follow these steps:
+- React.js
+- EmailJS for contact form
+- Swiper.js for carousels
+- CSS for styling
 
-## Technologies Used:
+## Local Development
 
-React
-HTML/CSS
-JavaScript
-License:
-This project is licensed under the MIT License.
+1. Clone the repository:
+```bash
+git clone https://github.com/KaiDove/website-portfolio.git
+cd website-portfolio
+```
 
-## Author:
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm start
+```
+
+## Deployment
+
+This website is hosted on GitHub Pages. To deploy:
+
+1. Make sure your changes are committed and pushed to the main branch
+2. Run the deployment command:
+```bash
+npm run deploy
+```
+
+This will build the project and deploy it to the `gh-pages` branch, which will automatically update the live site.
+
+The live site can be accessed at: https://kaidove.github.io/website-portfolio
+
+## Contact
+
 Kai Dove
-Email: ybr8ff@virginia.edu
-LinkedIn: Kai Dove's LinkedIn Profile
+University of Virginia
+Computer Science
