@@ -1,35 +1,44 @@
-import React from 'react';
-import "./App.css";
-import Header from './components/header/Header';
-import Home from './components/home/Home';
-import About from './components/about/About';
-import Skills from './components/skills/Skills';
+import React, { useEffect } from 'react';
+import './App.css';
+import Background from './components/Background';
+import Header from './components/Header/Header';
+import About from './components/About/About';
 import Projects from './components/projects/Projects';
-import Qualification from './components/qualification/Qualification';
-import Testimonials from './components/testimonials/Testimonials';
-import Contact from './components/contact/Contact';
-import Footer from './components/footer/Footer';
-import ScrollUp from './components/scrollup/ScrollUp';
+import Experience from './components/experience/Experience';
+import Skills from './components/skills/Skills';
+import { ThemeProvider } from './context/ThemeContext';
 
-const App = () => {
+function App() {
+  useEffect(() => {
+    // Initialize background animation
+    const bg = new Background();
+    bg.init();
+
+    return () => {
+      bg.dispose();
+    };
+  }, []);
+
   return (
-    <>
-      <Header />
+    <ThemeProvider>
+      {/* Background div for Three.js animation */}
+      <div id="bg"></div>
+      
+      {/* Main wrapper */}
+      <div id="wrap">
+        {/* Header component */}
+        <Header />
 
-      <main className='main'>
-        <Home />
-        <About />
-        <Skills />
-        <Projects />
-        <Qualification />
-        <Testimonials />
-        <Contact />
-      </main>
-
-      <Footer />
-      <ScrollUp/>
-    </>
-  )
+        {/* Main Content */}
+        <main className="main-content">
+          <About />
+          <Experience />
+          <Skills />
+          <Projects />
+        </main>
+      </div>
+    </ThemeProvider>
+  );
 }
 
 export default App;

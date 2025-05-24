@@ -6,32 +6,34 @@
   --header-height: 3rem;
 
   /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
-  --hue: 0;
-  --sat: 0%;
-  --title-color: hsl(var(--hue), var(--sat), 20%);
-  --title-color-dark: hsl(var(--hue), var(--sat), 0%);
-  --text-color: hsl(var(--hue), var(--sat), 46%);
-  --body-color: hsl(var(--hue), var(--sat), 98%);
-  --container-color: #fff;
+  --background: #ffffff;
+  --text-color: #000000;
+  --text-color-light: #000000;
+  --title-color: #000000;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --container-color: #ffffff;
+  
+  /*========== Debug ==========*/
+  --debug-borders: 0; /* Set to 1 to show debug borders */
 
   /*========== Font and typography ==========*/
-  --body-font: "Poppins", sans-serif;
+  --body-font: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --title-font: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 
-  /*.5rem = 8px | 1rem = 16px ...*/
-  --big-font-size: 3.5rem;
-  --h1-font-size: 2.25rem;
-  --h2-font-size: 1.5rem;
-  --h3-font-size: 1.25rem;
-  --normal-font-size: 1rem;
-  --small-font-size: 0.875rem;
-  --smaller-font-size: 0.813rem;
-  --tiny-font-size: 0.625rem;
+  /*========== Font sizes ==========*/
+  --large-font-size: 24px;
+  --h1-font-size: 20px;
+  --h2-font-size: 18px;
+  --h3-font-size: 16px;
+  --normal-font-size: 14px;
+  --small-font-size: 12px;
+  --smaller-font-size: 11px;
 
   /*========== Font weight ==========*/
+  --font-light: 300;
   --font-normal: 400;
   --font-medium: 500;
-  --font-semi-bold: 600;
+  --font-semibold: 600;
 
   /*========== Margenes Bottom ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
@@ -44,23 +46,28 @@
   --mb-2-5: 2.5rem;
   --mb-3: 3rem;
 
-  /*========== z   ==========*/
+  /*========== z index ==========*/
   --z-tooltip: 10;
   --z-fixed: 100;
   --z-modal: 1000;
 }
 
-/* Responsive typography */
-@media screen and (max-width: 992px) {
-  :root {
-    --big-font-size: 2.75rem;
-    --h1-font-size: 1.5rem;
-    --h2-font-size: 1.25rem;
-    --h3-font-size: 1rem;
-    --normal-font-size: 0.938rem;
-    --small-font-size: 0.813rem;
-    --smaller-font-size: 0.75rem;
-  }
+:root[data-theme="light"] {
+  --background: #ffffff;
+  --text-color: #000000;
+  --text-color-light: #000000;
+  --title-color: #000000;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --container-color: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  --background: #1a1a1a;
+  --text-color: #ffffff;
+  --text-color-light: #ffffff;
+  --title-color: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --container-color: #1a1a1a;
 }
 
 /*=============== BASE ===============*/
@@ -74,24 +81,33 @@ html {
   scroll-behavior: smooth;
 }
 
-body,
-button,
-input,
-textarea {
+body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
+  background-color: var(--background);
+  color: var(--text-color);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
+/* Override the default dark styles */
 body {
-  background-color: var(--body-color);
+  background: var(--background);
   color: var(--text-color);
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3, h4, h5, h6 {
   color: var(--title-color);
-  font-weight: var(--font-semi-bold);
+  font-family: var(--title-font);
+  font-weight: var(--font-medium);
+  line-height: 1.4;
 }
 
 ul {
@@ -100,6 +116,12 @@ ul {
 
 a {
   text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.7;
 }
 
 button {
@@ -114,13 +136,23 @@ img {
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 .section {
-  padding: 6rem 0 2rem;
+  padding: 80px 0;
 }
 
 .section__title {
-  font-size: var(--h1-font-size);
+  font-size: var(--large-font-size);
   color: var(--title-color);
+  text-align: center;
+  margin-bottom: 60px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .section__subtitle {
@@ -135,12 +167,6 @@ img {
 }
 
 /*=============== LAYOUT ===============*/
-.container {
-  max-width: 968px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .grid {
   display: grid;
   gap: 1.5rem;
@@ -169,8 +195,6 @@ img {
   align-items: center;
 }
 
-
-
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
@@ -196,11 +220,15 @@ img {
   }
 
   .section {
-    padding: 2rem 0 4rem;
+    padding: 60px 0;
   }
 
-  .section__subtitle {
-    margin-bottom: var(--mb-3);
+  .section__title {
+    margin-bottom: 40px;
+  }
+
+  .container {
+    padding: 0 15px;
   }
 }
 
@@ -208,13 +236,147 @@ img {
 
 /* For small devices */
 @media screen and (max-width: 350px) {
-  :root {
-    --big-font-size: 2.25rem;
-
-  }
-
   .container {
     margin-left: var(--mb-1);
     margin-right: var(--mb-1);
   }
+}
+
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+}
+
+/* Main wrapper */
+#wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* Background canvas */
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  max-width: 1920px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Inner container for content */
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: content-box;
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 0 20px;
+  }
+}
+
+/* Global link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+/* Utility classes */
+.hidden {
+  display: none;
+}
+
+/* Animation classes */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #contents {
+    padding: 150px 20px 50px;
+  }
+}
+
+/* Main content styles */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  min-height: 100vh;
+  margin-top: 80vh; /* Push content down to start at 80% of viewport height */
+}
+
+/* Section spacing */
+section {
+  padding: 100px 0;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  background-color: var(--background);
+}
+
+section:first-child {
+  padding-top: 120px; /* Account for header */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .main-content {
+    padding: 60px 20px;
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  section:first-child {
+    padding-top: 100px;
+  }
+}
+
+/* Remove content manager related styles */
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px !important;
+  display: block !important;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--text-color);
+  border-radius: 4px;
 }

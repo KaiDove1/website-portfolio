@@ -1,0 +1,100 @@
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  height: 26px;
+  border: calc(var(--debug-borders) * 1px) solid red;
+}
+
+.theme-switch {
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.theme-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 50px;
+  height: 26px;
+  background: var(--background);
+  border: 1px solid var(--title-color);
+  border-radius: 100px;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.theme-label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: var(--title-color);
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.theme-switch:checked + .theme-label:after {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.theme-icon {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.theme-svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+/* Light mode */
+:root[data-theme="light"] .theme-svg {
+  fill: #000000;
+}
+
+/* Dark mode */
+:root[data-theme="dark"] .theme-svg {
+  fill: #ffffff;
+}
+
+.theme-switch:not(:checked) + .theme-label .theme-icon {
+  right: 6px;
+  opacity: 1;
+}
+
+.theme-switch:checked + .theme-label .theme-icon {
+  left: 6px;
+  opacity: 1;
+}
+
+/* Hover effect */
+.theme-label:hover {
+  opacity: 0.9;
+}
+
+/* Focus styles for accessibility */
+.theme-switch:focus + .theme-label {
+  box-shadow: 0 0 0 2px var(--title-color);
+}
+
+@media (max-width: 768px) {
+  .theme-toggle {
+    margin-right: 15px;
+  }
+} 

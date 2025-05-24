@@ -1,0 +1,128 @@
+.experience {
+  padding: 6rem 2rem;
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+.section__title {
+  font-size: 2.5rem;
+  color: var(--title-color);
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.experience-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.experience-item {
+  position: relative;
+  background-color: var(--container-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.experience-item:hover {
+  transform: translateX(10px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.experience-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.experience-header {
+  margin-bottom: 1.5rem;
+}
+
+.company-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--title-color);
+  margin-bottom: 0.5rem;
+}
+
+.role {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+
+.period {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-color-light);
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.highlights li {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.highlights li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--title-color);
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: var(--text-color-light);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .experience {
+    padding: 4rem 1rem;
+  }
+
+  .section__title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .experience-item {
+    padding: 1.5rem;
+  }
+
+  .company-name {
+    font-size: 1.25rem;
+  }
+
+  .role {
+    font-size: 1rem;
+  }
+} 

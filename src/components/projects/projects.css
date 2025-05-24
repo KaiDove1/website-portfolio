@@ -1,5 +1,3 @@
-
-
 .services__container {
     grid-template-columns: repeat(3, 270px);
     justify-content: center;
@@ -169,4 +167,116 @@
         padding-right: 6rem;
     }
 
+}
+
+.projects {
+  padding: 6rem 2rem;
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-item {
+  position: relative;
+  background-color: var(--container-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-item:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--title-color);
+}
+
+.project-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-color-light);
+  margin-bottom: 1.5rem;
+}
+
+.project-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.project-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.project-features li {
+  font-size: 0.875rem;
+  color: var(--text-color-light);
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.project-features li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--title-color);
+}
+
+.project-link {
+  margin-top: auto;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 1px solid var(--title-color);
+  color: var(--title-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.project-link:hover {
+  background-color: var(--title-color);
+  color: var(--container-color);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .projects {
+    padding: 4rem 1rem;
+  }
+
+  .project-item {
+    padding: 1.5rem;
+    min-height: 250px;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+  }
 }
