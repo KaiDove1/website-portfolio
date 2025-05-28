@@ -4,7 +4,7 @@ import ThemeToggle from '../theme/ThemeToggle';
 import { FaGithub, FaLinkedinIn, FaEnvelope, FaFileAlt } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 
-const Header = () => {
+const Header = ({ activeSection }) => {
   return (
     <header id="head">
       <div className="inner">
@@ -75,7 +75,7 @@ const Header = () => {
         </div>
 
         {/* Center section - Logo and tagline */}
-        <div className="centerArea">
+        <div className={`centerArea ${activeSection ? 'section-active' : ''}`}>
           <h1 className="logo"><a href="/">KAI DOVE</a></h1>
           <p className="state">SEARCH FOR INNOVATIVE SOLUTIONS</p>
         </div>

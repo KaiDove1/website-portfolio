@@ -7,32 +7,47 @@ const Navigation = ({ onNavClick, activeSection }) => {
     onNavClick(section);
   };
 
+  // Add section-active class when any section is active
+  const navClassName = `gnav ${activeSection ? 'section-active' : ''}`;
+
   return (
-    <nav className="main-nav">
+    <nav className={navClassName}>
       <ul>
-        <li className="nav-item">
-          <button 
-            className={`nav-button ${activeSection === 'work' ? 'active' : ''}`}
-            onClick={() => handleClick('work')}
+        <li>
+          <a 
+            href="#work" 
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick('work');
+            }}
+            className={activeSection === 'work' ? 'active' : ''}
           >
-            WORK
-          </button>
+            EXPERIENCE
+          </a>
         </li>
-        <li className="nav-item">
-          <button 
-            className={`nav-button ${activeSection === 'about' ? 'active' : ''}`}
-            onClick={() => handleClick('about')}
+        <li>
+          <a 
+            href="#project"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick('project');
+            }}
+            className={activeSection === 'project' ? 'active' : ''}
           >
-            ABOUT
-          </button>
+            PROJECT
+          </a>
         </li>
-        <li className="nav-item">
-          <button 
-            className={`nav-button ${activeSection === 'contact' ? 'active' : ''}`}
-            onClick={() => handleClick('contact')}
+        <li>
+          <a 
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick('about');
+            }}
+            className={activeSection === 'about' ? 'active' : ''}
           >
-            CONTACT
-          </button>
+            ABOUT ME 
+          </a>
         </li>
       </ul>
     </nav>

@@ -51,7 +51,6 @@ const Experience = () => {
 
   return (
     <section id="experience" className="experience">
-      <h2 className="section__title">Work Experience</h2>
       <div className="experience-grid">
         {experiences.map((exp) => (
           <div 

@@ -10,6 +10,7 @@
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+  border: 1px solid red;
 }
 
 #head.scrolled {
@@ -19,7 +20,7 @@
 #head .inner {
   position: relative;
   height: 100%;
-  margin: 0 80px;
+  margin: 0 30px;
   line-height: 1.6;
   border: calc(var(--debug-borders) * 1px) solid red;
 }
@@ -162,6 +163,10 @@
     width: 18px;
     height: 18px;
   }
+
+  .centerArea.section-active {
+    transform: translate(-50%, -30vh); /* Keep consistent with desktop */
+  }
 }
 
 /* For small devices */
@@ -264,35 +269,42 @@
 /* Center section */
 .centerArea {
   position: absolute;
-  left: 50%;
   top: 50%;
-  width: 220px;
-  margin: -52px 0 0 -110px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
 }
 
-.logo {
-  margin: 0 0 10px 0;
+/* Move centerArea up when section is active */
+.centerArea.section-active {
+  transform: translate(-50%, -30vh); /* -50% X for centering, -30vh Y for moving up */
+}
+
+
+.centerArea .logo {
+  margin-bottom: 20px;
 }
 
 .logo a {
-  display: block;
+  display: inline-block;
   font-size: 24px;
-  letter-spacing: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   color: var(--title-color);
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: opacity 0.3s ease;
 }
 
 .logo a:hover {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .state {
   font-size: 14px;
   letter-spacing: 0.2em;
   color: var(--text-color);
-  line-height: 1.4;
 }
 
 /* Navigation */
@@ -377,8 +389,11 @@
   }
 
   .centerArea {
-    width: 180px;
-    margin: -45px 0 0 -90px;
+    width: 90%;
+  }
+
+  .centerArea.section-active {
+    transform: translate(-50%, -30vh); /* Keep consistent with desktop */
   }
 
   .logo a {
@@ -395,6 +410,16 @@
 
   .gnav ul li {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .centerArea.section-active {
+    transform: translate(-50%, -30vh); /* Keep consistent with desktop */
+  }
+
+  .logo a {
+    font-size: 28px;
   }
 }
 
