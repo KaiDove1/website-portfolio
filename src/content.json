@@ -22,9 +22,9 @@
   },
   "Info": {
     "positionsTitle": "Experience",
-    "positionsSubtitle": "Research Assistant & Software Engineer @ UVA",
+    "positionsSubtitle": "Junior Software Developer @ LionPro.AI",
     "completedTitle": "Achievements",
-    "completedSubtitle": "3 TA Positions\n3+ Hackathons",
+    "completedSubtitle": "Dean's List (6 Semesters)\n150+ LeetCode Problems",
     "studentTitle": "Education",
     "studentSubtitle": "B.S. Computer Science @ UVA"
   },
@@ -54,17 +54,17 @@
       "level1": "Expert",
       "title2": "Django",
       "level2": "Expert",
-      "title3": "Tensorflow",
+      "title3": "TensorFlow",
       "level3": "Expert",
-      "title4": "Laravel",
+      "title4": "LangChain",
       "level4": "Advanced",
-      "title5": "Selenium",
+      "title5": "AWS (EC2/S3)",
       "level5": "Advanced",
-      "title6": "Firebase",
+      "title6": "Docker",
       "level6": "Advanced",
       "title7": "React/Node.js",
       "level7": "Advanced",
-      "title8": "PostGre",
+      "title8": "PostgreSQL",
       "level8": "Advanced"
     }
   },
@@ -110,6 +110,48 @@
       ],
       "demoUrl": "",
       "githubUrl": "https://github.com/KaiDove1/brain-tumor-segmentation"
+    },
+    {
+      "id": 4,
+      "icon": "bx bx-restaurant",
+      "outsidetitle": "Beli \\nRestaurant App",
+      "insideTitle": "Beli - Restaurant Tracking & Discovery App",
+      "description": "Stack: React, TypeScript, Tailwind CSS, Vite\\nModern restaurant tracking web application",
+      "details": [
+        "Built full-stack restaurant discovery platform with React 18 and TypeScript featuring feed system, search functionality, and user authentication. Implemented Context API for state management handling 12+ mock restaurants with real-time filtering and CRUD operations.",
+        "Engineered responsive UI with Tailwind CSS supporting mobile, tablet, and desktop viewports. Created reusable component library (Button, Card, Input) with consistent design system featuring smooth animations and hover effects.",
+        "Architected clean component structure with React Router v6 for navigation across 5+ pages (Feed, Add, Detail, Discover, Auth). Designed for easy backend integration with PostgreSQL and JWT authentication ready for production deployment."
+      ],
+      "demoUrl": "",
+      "githubUrl": "https://github.com/KaiDove1/beli-replica"
+    },
+    {
+      "id": 5,
+      "icon": "bx bx-code-block",
+      "outsidetitle": "Portfolio \\nWebsite",
+      "insideTitle": "Personal Portfolio Website with Real-Time Stats",
+      "description": "Stack: React, JavaScript, CSS3, EmailJS\\nInteractive developer portfolio",
+      "details": [
+        "Developed responsive portfolio website with React featuring dark mode toggle, real-time GitHub API integration displaying contribution stats and repository data, and LeetCode stats integration showing 150+ solved problems with difficulty breakdown.",
+        "Built comprehensive project showcase with modal views, live demo links, and GitHub repository integration. Implemented EmailJS for contact form with validation and success/error handling, achieving 100% form submission success rate.",
+        "Created dynamic achievements section highlighting Dean's List honors, open source contributions to Hugging Face Transformers, and research presentations. Optimized for SEO and accessibility with responsive design supporting all device sizes."
+      ],
+      "demoUrl": "https://kaidove1.github.io/website-portfolio",
+      "githubUrl": "https://github.com/KaiDove1/website-portfolio"
+    },
+    {
+      "id": 6,
+      "icon": "bx bx-line-chart",
+      "outsidetitle": "Investiverse \\nFintech Platform",
+      "insideTitle": "Investiverse - AI-Powered Stock Learning Platform",
+      "description": "Stack: PHP, JavaScript, PostgreSQL, Docker\\nFull-stack fintech education platform",
+      "details": [
+        "Architected full-stack fintech platform with microservices architecture using PHP backend, PostgreSQL database, and Docker containerization. Implemented real-time stock market simulator with WebSocket connections processing concurrent user requests with 99.9% uptime.",
+        "Built OAuth 2.0 authentication system with JWT session management and role-based access control (RBAC) ensuring enterprise-grade security compliance. Optimized database queries with indexing reducing response times by 35%.",
+        "Engineered responsive dashboards with Chart.js visualizations and community forums using AJAX, driving 40% increase in user engagement through gamified investment challenges and peer-to-peer learning features."
+      ],
+      "demoUrl": "",
+      "githubUrl": "https://github.com/KaiDove1/investiverse"
     }
   ]
   

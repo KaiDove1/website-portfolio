@@ -4,14 +4,20 @@ import content from '../../content.json';
 
 const Services = () => {
     const [toggleState, setToggleState] = useState(0);
-    const project1 = content.projects[0];
-    const project2 = content.projects[1];
-    const project3 = content.projects[2];
+    const projects = content.projects;
 
     const toggleTab = (index) => {
         setToggleState(index);
     }
 
+    const icons = [
+        "bx bx-brain",
+        "bx bx-map-alt",
+        "bx bx-health",
+        "bx bx-restaurant",
+        "bx bx-code-block",
+        "bx bx-line-chart"
+    ];
 
     return (
         <section className="services section" id="projects">
@@ -19,215 +25,64 @@ const Services = () => {
             <span className="section__subtitle">Most relevant projects...</span>
 
             <div className="services__container container grid">
-                {/* Project 1 */}
-                <div className="services__content">
-                    <div>
-                        <i className="bx bx-barcode-reader services__icon"></i>
-                        <h3 className="services__title">
-                            {project1.outsidetitle.split('\\n').map((line, index) => (
-                                <React.Fragment key={index}>
-                                    {line}
-                                    {index < project1.outsidetitle.split('\\n').length - 1 && <br />}
-                                </React.Fragment>
-                            ))}
-                        </h3>
-                    </div>
-
-                    <span className="services__button" onClick={() => toggleTab(1)}>More Details
-                        <i className="uil uil-arrow-right services__button-icon"></i></span>
-
-                    <div className={toggleState === 1 ? "services__modal active-modal" : "services__modal"}>
-                        <div className="services__modal-content">
-                            
-                            <i onClick={() => toggleTab(0)} className="uil uil-times services__modal-close"></i>
-
-                            <h3 className="services__modal-title">{project1.insideTitle}</h3>
-                            <p className="services__modal-description">
-                                {project1.description.split('\\n').map((line, index) => (
-                                    <React.Fragment key={index}>
+                {projects.map((project, index) => (
+                    <div className="services__content" key={project.id}>
+                        <div>
+                            <i className={`${project.icon || icons[index]} services__icon`}></i>
+                            <h3 className="services__title">
+                                {project.outsidetitle.split('\\n').map((line, lineIndex) => (
+                                    <React.Fragment key={lineIndex}>
                                         {line}
-                                        {index < project1.description.split('\\n').length - 1 && <br />}
-                                    </React.Fragment>
-                                ))}
-                            </p>
-                            <ul className="services__modal-services grid">
-                                <li className="services__modal-service">
-
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project1.details[0]}</p>
-                                </li>
-
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project1.details[1]}</p>
-                                </li>
-
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project1.details[2]}</p>
-                                </li>
-
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project1.details[3]}</p>
-                                </li>
-                            </ul>
-
-                            <div className="services__modal-buttons">
-                                {project1.demoUrl && (
-                                    <a href={project1.demoUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
-                                        <i className="uil uil-external-link-alt"></i> Live Demo
-                                    </a>
-                                )}
-                                {project1.githubUrl && (
-                                    <a href={project1.githubUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
-                                        <i className="uil uil-github-alt"></i> View Code
-                                    </a>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="services__content">
-                    <div>
-                        <i className="bx bx-mobile-alt services__icon"></i>
-                        <h3 className="services__title">
-                            {project2.outsidetitle.split('\\n').map((line, index, array) => (
-                                <React.Fragment key={index}>
-                                    {line}
-                                    {index < array.length - 1 && <br />}
-                                </React.Fragment>
-                            ))}
-                        </h3>
-
-                    </div>
-
-                    <span onClick={() => toggleTab(2)} className="services__button">More Details
-                        <i className="uil uil-arrow-right services__button-icon"></i></span>
-
-                    <div className={toggleState === 2 ? "services__modal active-modal" : "services__modal"}>
-                        <div className="services__modal-content">
-                            <i onClick={() => toggleTab(0)} className="uil uil-times services__modal-close"></i>
-
-                            <h3 className="services__modal-title">
-                                {project2.insideTitle.split('\\n').map((line, index, array) => (
-                                    <React.Fragment key={index}>
-                                        {line}
-                                        {index < array.length - 1 && <br />}
+                                        {lineIndex < project.outsidetitle.split('\\n').length - 1 && <br />}
                                     </React.Fragment>
                                 ))}
                             </h3>
+                        </div>
 
-                            <p className="services__modal-description">
-                                {project2.description.split('\\n').map((line, index, array) => (
-                                    <React.Fragment key={index}>
-                                        {line}
-                                        {index < array.length - 1 && <br />}
-                                    </React.Fragment>
-                                ))}
-                            </p>
+                        <span className="services__button" onClick={() => toggleTab(project.id)}>
+                            More Details
+                            <i className="uil uil-arrow-right services__button-icon"></i>
+                        </span>
 
-                            <ul className="services__modal-services grid">
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project2.details[0]}</p>
-                                </li>
+                        <div className={toggleState === project.id ? "services__modal active-modal" : "services__modal"}>
+                            <div className="services__modal-content">
+                                <i onClick={() => toggleTab(0)} className="uil uil-times services__modal-close"></i>
 
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project2.details[1]}</p>
-                                </li>
+                                <h3 className="services__modal-title">{project.insideTitle}</h3>
+                                <p className="services__modal-description">
+                                    {project.description.split('\\n').map((line, lineIndex) => (
+                                        <React.Fragment key={lineIndex}>
+                                            {line}
+                                            {lineIndex < project.description.split('\\n').length - 1 && <br />}
+                                        </React.Fragment>
+                                    ))}
+                                </p>
 
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project2.details[2]}</p>
-                                </li>
+                                <ul className="services__modal-services grid">
+                                    {project.details.map((detail, detailIndex) => (
+                                        <li className="services__modal-service" key={detailIndex}>
+                                            <i className="bx bx-right-arrow services__modal-icon"></i>
+                                            <p className="services__modal-info">{detail}</p>
+                                        </li>
+                                    ))}
+                                </ul>
 
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project2.details[3]}</p>
-                                </li>
-                            </ul>
-
-                            <div className="services__modal-buttons">
-                                {project2.demoUrl && (
-                                    <a href={project2.demoUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
-                                        <i className="uil uil-external-link-alt"></i> Live Demo
-                                    </a>
-                                )}
-                                {project2.githubUrl && (
-                                    <a href={project2.githubUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
-                                        <i className="uil uil-github-alt"></i> View Code
-                                    </a>
-                                )}
+                                <div className="services__modal-buttons">
+                                    {project.demoUrl && (
+                                        <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
+                                            <i className="uil uil-external-link-alt"></i> Live Demo
+                                        </a>
+                                    )}
+                                    {project.githubUrl && (
+                                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
+                                            <i className="uil uil-github-alt"></i> View Code
+                                        </a>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className="services__content">
-                    <div>
-                        <i className="bx bxl-twitter services__icon"></i>
-                        <h3 className="services__title">
-                            {project3.outsidetitle.split('\\n').map((line, index, array) => (
-                                <React.Fragment key={index}>
-                                    {line}
-                                    {index < array.length - 1 && <br />}
-                                </React.Fragment>
-                            ))}
-                        </h3>
-                    </div>
-
-                    <span onClick={() => toggleTab(3)} className="services__button">More Details
-                        <i className="uil uil-arrow-right services__button-icon"></i></span>
-
-                    <div className={toggleState === 3 ? "services__modal active-modal" : "services__modal"}>
-                        <div className="services__modal-content">
-                            <i onClick={() => toggleTab(0)} className="uil uil-times services__modal-close"></i>
-
-                            <h3 className="services__modal-title">{project3.insideTitle}</h3>
-                            <p className="services__modal-description">
-                                {project3.description.split('\\n').map((line, index) => (
-                                    <React.Fragment key={index}>
-                                        {line}
-                                        {index < project1.description.split('\\n').length - 1 && <br />}
-                                    </React.Fragment>
-                                ))}
-                            </p>
-                            <ul className="services__modal-services grid">
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project3.details[0]}</p>
-                                </li>
-
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project3.details[1]}</p>
-                                </li>
-
-                                <li className="services__modal-service">
-                                    <i className="bx bx-right-arrow services__modal-icon"></i>
-                                    <p className="services__modal-info">{project3.details[2]}</p>
-                                </li>
-
-                            </ul>
-
-                            <div className="services__modal-buttons">
-                                {project3.demoUrl && (
-                                    <a href={project3.demoUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
-                                        <i className="uil uil-external-link-alt"></i> Live Demo
-                                    </a>
-                                )}
-                                {project3.githubUrl && (
-                                    <a href={project3.githubUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
-                                        <i className="uil uil-github-alt"></i> View Code
-                                    </a>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                ))}
             </div>
         </section>
     )
