@@ -1,23 +1,38 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import "./contact.css"
 
 const Contact = () => {
     const form = useRef();
+    const [sending, setSending] = useState(false);
+    const [message, setMessage] = useState('');
 
     const sendEmail = (e) => {
         e.preventDefault();
+        setSending(true);
+        setMessage('');
 
-        emailjs.sendForm('service_rbeh4f4',
-            'template_tp658as',
+        emailjs.sendForm(
+            process.env.REACT_APP_EMAILJS_SERVICE_ID,
+            process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
             form.current,
-            '865Kd8FFdMX3gMGLy')
-            e.target.reset()
-
+            process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+        )
+        .then((result) => {
+            console.log('Email sent successfully:', result.text);
+            setMessage('Message sent successfully! I\'ll get back to you soon.');
+            e.target.reset();
+            setSending(false);
+        })
+        .catch((error) => {
+            console.error('Email send failed:', error.text);
+            setMessage('Failed to send message. Please try again or contact me directly.');
+            setSending(false);
+        });
     };
     return (
         <section className="contact section" id="contact">
-            <h2 className="section__title">Get in in touch</h2>
+            <h2 className="section__title">Get in touch</h2>
             <span className="section__subtitle">Contact Me</span>
 
             <div className="contact__container container grid">
@@ -75,8 +90,14 @@ const Contact = () => {
                             <textarea name="project" cols="30" rows="10" className="contact__form-input" placeholder="Insert Message Here"></textarea>
                         </div>
 
-                        <button className="button button--flex">
-                            Send Message
+                        {message && (
+                            <div className={`contact__message ${message.includes('success') ? 'contact__message--success' : 'contact__message--error'}`}>
+                                {message}
+                            </div>
+                        )}
+
+                        <button className="button button--flex" disabled={sending}>
+                            {sending ? 'Sending...' : 'Send Message'}
                             <svg
                                 className="button__icon"
                                 xmlns="http://www.w3.org/2000/svg"

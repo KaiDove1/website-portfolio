@@ -46,7 +46,7 @@
 }
 
 body{
-    height: 100b
+    height: 100vh;
 }
 
 #image-track > .image {

@@ -72,6 +72,19 @@ const Services = () => {
                                     <p className="services__modal-info">{project1.details[3]}</p>
                                 </li>
                             </ul>
+
+                            <div className="services__modal-buttons">
+                                {project1.demoUrl && (
+                                    <a href={project1.demoUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
+                                        <i className="uil uil-external-link-alt"></i> Live Demo
+                                    </a>
+                                )}
+                                {project1.githubUrl && (
+                                    <a href={project1.githubUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
+                                        <i className="uil uil-github-alt"></i> View Code
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -136,6 +149,19 @@ const Services = () => {
                                     <p className="services__modal-info">{project2.details[3]}</p>
                                 </li>
                             </ul>
+
+                            <div className="services__modal-buttons">
+                                {project2.demoUrl && (
+                                    <a href={project2.demoUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
+                                        <i className="uil uil-external-link-alt"></i> Live Demo
+                                    </a>
+                                )}
+                                {project2.githubUrl && (
+                                    <a href={project2.githubUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
+                                        <i className="uil uil-github-alt"></i> View Code
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -186,6 +212,19 @@ const Services = () => {
                                 </li>
 
                             </ul>
+
+                            <div className="services__modal-buttons">
+                                {project3.demoUrl && (
+                                    <a href={project3.demoUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
+                                        <i className="uil uil-external-link-alt"></i> Live Demo
+                                    </a>
+                                )}
+                                {project3.githubUrl && (
+                                    <a href={project3.githubUrl} target="_blank" rel="noopener noreferrer" className="button button--flex button--small">
+                                        <i className="uil uil-github-alt"></i> View Code
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

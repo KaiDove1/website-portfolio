@@ -14,6 +14,10 @@
   --text-color: hsl(var(--hue), var(--sat), 46%);
   --body-color: hsl(var(--hue), var(--sat), 98%);
   --container-color: #fff;
+  --scroll-bar-color: hsl(var(--hue), var(--sat), 85%);
+  --scroll-thumb-color: hsl(var(--hue), var(--sat), 75%);
+  --border-color: hsl(var(--hue), var(--sat), 90%);
+  --shadow-color: rgba(0, 0, 0, 0.1);
 
   /*========== Font and typography ==========*/
   --body-font: "Poppins", sans-serif;
@@ -48,6 +52,20 @@
   --z-tooltip: 10;
   --z-fixed: 100;
   --z-modal: 1000;
+}
+
+/*=============== DARK MODE ===============*/
+[data-theme="dark"] {
+  /*========== Dark Mode Colors ==========*/
+  --title-color: hsl(var(--hue), var(--sat), 95%);
+  --title-color-dark: hsl(var(--hue), var(--sat), 100%);
+  --text-color: hsl(var(--hue), var(--sat), 75%);
+  --body-color: hsl(var(--hue), var(--sat), 8%);
+  --container-color: hsl(var(--hue), var(--sat), 12%);
+  --scroll-bar-color: hsl(var(--hue), var(--sat), 20%);
+  --scroll-thumb-color: hsl(var(--hue), var(--sat), 30%);
+  --border-color: hsl(var(--hue), var(--sat), 20%);
+  --shadow-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Responsive typography */

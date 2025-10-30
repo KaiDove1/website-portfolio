@@ -43,7 +43,7 @@
 }
 
 /* Active Link */
-.active_link, 
+.active-link,
 .nav__link:hover {
     color: var(--title-color-dark);
 }
@@ -84,7 +84,7 @@
     .nav__list{
         display:grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2re;
+        gap: 2rem;
     }
 
     .nav__icon{

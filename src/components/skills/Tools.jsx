@@ -14,7 +14,6 @@ const Backend = () => {
                         <i class='bx bxl-github' ></i>
                         <div>
                             <h3 className="skills__name">{toolsData.title1}</h3>
-                            <span className="skills__level">{toolsData.level1}</span>
                         </div>
                     </div>
                     {/* ------------------------------------------------------- */}
@@ -22,7 +21,6 @@ const Backend = () => {
                         <i class='bx bxl-django'></i>
                         <div>
                             <h3 className="skills__name">{toolsData.title2}</h3>
-                            <span className="skills__level">{toolsData.level2}</span>
                         </div>
                     </div>
                     {/* ------------------------------------------------------- */}
@@ -31,7 +29,6 @@ const Backend = () => {
 
                         <div>
                             <h3 className="skills__name">{toolsData.title3}</h3>
-                            <span className="skills__level">{toolsData.level3}</span>
                         </div>
                     </div>
 
@@ -41,7 +38,6 @@ const Backend = () => {
 
                         <div>
                             <h3 className="skills__name">{toolsData.title4}</h3>
-                            <span className="skills__level">{toolsData.level4}</span>
                         </div>
                     </div>
 
@@ -51,7 +47,6 @@ const Backend = () => {
 
                         <div>
                             <h3 className="skills__name">{toolsData.title5}</h3>
-                            <span className="skills__level">{toolsData.level5}</span>
                         </div>
                     </div>
 
@@ -61,27 +56,24 @@ const Backend = () => {
 
                         <div>
                             <h3 className="skills__name">{toolsData.title6}</h3>
-                            <span className="skills__level">{toolsData.level6}</span>
                         </div>
                     </div>
 
-                    {/* ------------------------------------------------------- */} 
+                    {/* ------------------------------------------------------- */}
                     <div className="skills__data">
                         <i class='bx bxl-react' ></i>
 
                         <div>
                             <h3 className="skills__name">{toolsData.title7}</h3>
-                            <span className="skills__level">{toolsData.level7}</span>
                         </div>
                     </div>
 
-                    {/* ------------------------------------------------------- */}        
+                    {/* ------------------------------------------------------- */}
                     <div className="skills__data">
                         <i class='bx bxl-postgresql' ></i>
 
                         <div>
                             <h3 className="skills__name">{toolsData.title8}</h3>
-                            <span className="skills__level">{toolsData.level8}</span>
                         </div>
                     </div>
 
