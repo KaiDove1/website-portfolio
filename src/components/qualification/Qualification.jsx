@@ -3,15 +3,15 @@ import "./qualification.css"
 
 const Qualification = () => {
 
-    const [toggleState, setToggleState] = useState(0);
+    const [toggleState, setToggleState] = useState(2);
 
     const toggleTab = (index) => {
         setToggleState(index);
     }
 
     return (
-        <section className="qualification section">
-            <h2 className="section__title">Qualification</h2>
+        <section className="qualification section" id="qualification">
+            <h2 className="section__title">Experience &amp; Education</h2>
             <span className="section__subtitle">My Personal Journey (Press Icons)</span>
 
             <div className="qualification__container container">
@@ -39,7 +39,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">University of Virginia</h3>
                                 <span className="qualification__subtitle">B.S. Computer Science</span>
-                                <div className="qualification__calender">
+                                <div className="qualification__calendar">
                                     <i className="uil uil-calendar-alt"></i> August 2022 - May 2026
                                 </div>
                             </div>
@@ -61,7 +61,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">Forest Park High School</h3>
                                 <span className="qualification__subtitle">High School Diploma</span>
-                                <div className="qualification__calender">
+                                <div className="qualification__calendar">
                                     <i className="uil uil-calendar-alt"></i> August 2018 - May 2022
                                 </div>
                             </div>
@@ -73,7 +73,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">Junior Software Developer</h3>
                                 <span className="qualification__subtitle">LionPro.AI (Lion Federal)</span>
-                                <div className="qualification__calender">
+                                <div className="qualification__calendar">
                                     <i className="uil uil-calendar-alt"></i> August 2025 - Present
                                 </div>
                             </div>
@@ -95,7 +95,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">Software Engineer Intern</h3>
                                 <span className="qualification__subtitle">Lion Federal</span>
-                                <div className="qualification__calender">
+                                <div className="qualification__calendar">
                                     <i className="uil uil-calendar-alt"></i> May 2025 - August 2025
                                 </div>
                             </div>
@@ -105,7 +105,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">Software Engineer Intern</h3>
                                 <span className="qualification__subtitle">Electric On Ramp</span>
-                                <div className="qualification__calender">
+                                <div className="qualification__calendar">
                                     <i className="uil uil-calendar-alt"></i> May 2024 - August 2024
                                 </div>
                             </div>
@@ -127,7 +127,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">Teaching Assistant</h3>
                                 <span className="qualification__subtitle">University of Virginia</span>
-                                <div className="qualification__calender">
+                                <div className="qualification__calendar">
                                     <i className="uil uil-calendar-alt"></i> August 2024 - May 2026
                                 </div>
                             </div>
@@ -137,7 +137,7 @@ const Qualification = () => {
                             <div>
                                 <h3 className="qualification__title">Research Assistant</h3>
                                 <span className="qualification__subtitle">UVA Medical Image Lab</span>
-                                <div className="qualification__calender">
+                                <div className="qualification__calendar">
                                     <i className="uil uil-calendar-alt"></i> May 2023 - August 2023
                                 </div>
                             </div>
