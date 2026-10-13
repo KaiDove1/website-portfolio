@@ -18,7 +18,7 @@ const Certifications = () => {
       title: 'Dean\'s List',
       organization: 'University of Virginia',
       date: '6 Semesters',
-      description: 'Named to the Dean's List for six semesters in the Computer Science program'
+      description: "Named to the Dean's List for six semesters in the Computer Science program"
     },
     {
       id: 3,
