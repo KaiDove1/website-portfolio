@@ -13,12 +13,12 @@
   "Biograph":{
     "title": "Kai Dove",
     "subtitle": "AI & Machine Learning Engineer",
-    "description": "Computer Science @ University of Virginia | Building production ML systems and scalable web applications | Experienced in Python, React, TensorFlow, and cloud architecture"
+    "description": "B.S. Computer Science, University of Virginia | Building production ML systems and scalable web applications | Experienced in Python, React, TensorFlow, and cloud architecture"
   },
   "About": {
     "title": "About Me",
     "subtitle": "Engineering Impactful Software Solutions",
-    "description": "Results-driven Computer Science student at UVA with extensive experience architecting full-stack applications, training deep learning models, and conducting research. Specialized in building scalable systems that process real-world data, from fintech platforms handling financial transactions to ML pipelines analyzing satellite imagery. Strong foundation in algorithms, data structures, and software engineering best practices. Proven ability to deliver measurable impact through clean, maintainable code and innovative problem-solving."
+    "description": "Computer Science graduate from the University of Virginia with extensive experience architecting full-stack applications, training deep learning models, and conducting research. Specialized in building scalable systems that process real-world data, from fintech platforms handling financial transactions to ML pipelines analyzing satellite imagery. Strong foundation in algorithms, data structures, and software engineering best practices. Proven ability to deliver measurable impact through clean, maintainable code and innovative problem-solving."
   },
   "Info": {
     "positionsTitle": "Experience",
@@ -26,7 +26,7 @@
     "completedTitle": "Achievements",
     "completedSubtitle": "Dean's List (6 Semesters)\n150+ LeetCode Problems",
     "studentTitle": "Education",
-    "studentSubtitle": "B.S. Computer Science @ UVA"
+    "studentSubtitle": "B.S. Computer Science, UVA (2026)"
   },
   "Languages": {
     "Programming Languages": [
