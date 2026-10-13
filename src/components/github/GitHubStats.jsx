@@ -71,9 +71,27 @@ const GitHubStats = () => {
     return (
       <section className="github section" id="github">
         <h2 className="section__title">Coding Activity</h2>
-        <span className="section__subtitle">Real-time Development Stats</span>
+        <span className="section__subtitle">Development Stats</span>
         <div className="github__container container">
           <div className="github__loading">Loading stats...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (stats.error) {
+    return (
+      <section className="github section" id="github">
+        <h2 className="section__title">Coding Activity</h2>
+        <span className="section__subtitle">Development Stats</span>
+        <div className="github__container container">
+          <div className="github__loading">
+            GitHub stats are temporarily unavailable.{' '}
+            <a href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer">View the profile on GitHub</a>.
+          </div>
+          <div className="github__dual-layout">
+            <LeetCodeStats />
+          </div>
         </div>
       </section>
     );
@@ -82,7 +100,7 @@ const GitHubStats = () => {
   return (
     <section className="github section" id="github">
       <h2 className="section__title">Coding Activity</h2>
-      <span className="section__subtitle">Real-time Development Stats</span>
+      <span className="section__subtitle">Development Stats</span>
 
       <div className="github__container container">
         <div className="github__dual-layout">

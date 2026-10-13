@@ -21,6 +21,13 @@
   color: var(--title-color);
 }
 
+.leetcode__note {
+  font-size: var(--smaller-font-size);
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: var(--mb-1);
+}
+
 .leetcode__loading {
   text-align: center;
   padding: 2rem;

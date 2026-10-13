@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './leetcodeStats.css';
 
+// Verified against LeetCode's GraphQL API on 2026-10-12. Shown only when the live stats API is unavailable.
+const SNAPSHOT = {
+  asOf: 'October 2026',
+  totalSolved: 503,
+  easySolved: 251,
+  mediumSolved: 234,
+  hardSolved: 18,
+  ranking: 211951,
+  acceptanceRate: 75.1
+};
+
 const LeetCodeStats = () => {
   const username = 'KaiDove';
   const [stats, setStats] = useState({
@@ -11,7 +22,8 @@ const LeetCodeStats = () => {
     ranking: 0,
     acceptanceRate: 0,
     loading: true,
-    error: null
+    error: null,
+    snapshot: false
   });
 
   useEffect(() => {
@@ -33,21 +45,17 @@ const LeetCodeStats = () => {
           ranking: data.ranking || 0,
           acceptanceRate: data.acceptanceRate || 0,
           loading: false,
-          error: null
+          error: null,
+          snapshot: false
         });
       } catch (error) {
         console.error('Error fetching LeetCode data:', error);
-        setStats(prev => ({
-          ...prev,
+        setStats({
+          ...SNAPSHOT,
           loading: false,
           error: error.message,
-          totalSolved: 150,
-          easySolved: 80,
-          mediumSolved: 55,
-          hardSolved: 15,
-          ranking: 185000,
-          acceptanceRate: 68.5
-        }));
+          snapshot: true
+        });
       }
     };
 
@@ -72,6 +80,10 @@ const LeetCodeStats = () => {
         <i className="uil uil-brackets-curly"></i>
         LeetCode Progress
       </h3>
+
+      {stats.snapshot && (
+        <p className="leetcode__note">Snapshot from {SNAPSHOT.asOf}. Live stats are unavailable right now.</p>
+      )}
 
       <div className="leetcode__container">
         <div className="leetcode__stats-grid">
