@@ -31,7 +31,7 @@ const Data = () => {
           </svg>
         </a>
 
-        <a href="/resume.pdf" download="Kai_Dove_Resume.pdf" className="button button--flex button--white">
+        <a href={`${process.env.PUBLIC_URL}/resume.pdf`} download="Kai_Dove_Resume.pdf" className="button button--flex button--white">
           Download CV
           <i className="uil uil-download-alt button__icon"></i>
         </a>
