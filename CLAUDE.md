@@ -4,105 +4,70 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A modern, responsive personal portfolio website built with React.js showcasing projects, skills, and experience. The site features a unique navigation system that reveals content sections on-demand, with an animated Three.js background and theme switching capabilities.
+A single-page personal portfolio built with React (Create React App). Every section renders on one scrolling page and the header links are in-page `#anchors`. There is no client-side router; adding one (for example `HashRouter`) breaks the anchor navigation.
 
-Deployed on GitHub Pages at: https://kaidove.github.io/website-portfolio
+Deployed on GitHub Pages at: https://kaidove1.github.io/website-portfolio
 
 ## Development Commands
 
-### Local Development
 ```bash
 npm install          # Install dependencies
-npm start            # Start development server at localhost:3000
-npm run build        # Production build to /build directory
-npm test             # Run tests with React Testing Library
+npm start            # Dev server at http://localhost:3000/website-portfolio
+npm run build        # Production build to /build
+npm test             # React Testing Library (no tests exist yet)
 ```
 
 ### Deployment
+
 ```bash
-npm run deploy       # Build and deploy to GitHub Pages (gh-pages branch)
+npm run deploy       # predeploy runs the build, then pushes /build to the gh-pages branch
 ```
 
-Note: The `deploy` command runs `predeploy` (build) automatically before deploying.
+Only deploy when explicitly asked. The `gh-pages` branch is a build artifact; never edit it directly. The site is served from the `/website-portfolio` subdirectory (`homepage` in package.json), so links to files in `public/` must use `process.env.PUBLIC_URL`.
 
 ## Architecture
 
-### State Management & Navigation
-- **ThemeContext** (`src/context/ThemeContext.jsx`): Global theme state (light/dark mode)
-- **App-level state**: Navigation is managed through `activeSection` state in `App.js`
-  - Clicking a nav item shows that section's content
-  - Clicking the same nav item again hides the content
-  - Only one section can be active at a time
-  - Three main sections: 'work', 'project', 'about'
+- `src/index.js` renders `<App />` inside `React.StrictMode`.
+- `src/App.js` wraps everything in `ThemeProvider` and renders, in order: `Header`, then `<main>` with `Home`, `About`, `Skills`, `GitHubStats`, `Projects`, `Qualification`, `Certifications`, `Contact`, then `Footer`, `ScrollUp`, `ThemeToggle`.
 
-### Component Structure
-```
-App.js (root component)
-├── Background.js (Three.js animated wireframe)
-├── Header/ (logo and branding)
-├── Navigation/ (nav buttons that control activeSection)
-└── Content sections (conditionally rendered based on activeSection):
-    ├── Experience + Skills (when activeSection === 'work')
-    ├── Projects (when activeSection === 'project')
-    └── About (when activeSection === 'about')
-```
+Component notes:
 
-### Three.js Background Animation
-The `Background.js` class creates an animated icosahedron wireframe:
-- Initialized in `App.js` on mount, disposed on unmount
-- Automatically adjusts color/opacity based on theme (via MutationObserver)
-- Light mode: darker grey (0x666666), higher opacity (0.15)
-- Dark mode: lighter grey (0xcccccc), lower opacity (0.1)
-- Handles window resize events
+- **Header** (`components/header`): anchor links to `#home`, `#about`, `#skills`, `#github`, `#projects`, `#qualification`, `#certifications`, `#contact`. Mobile menu is toggled with local state; a scroll listener adds `.scroll-header`.
+- **Home** (`components/home`): hero with `Social` links, `Data` (name, headline, bio, "Say Hello" and "Download CV" buttons) and `ScrollDown`.
+- **About** (`components/about`): headshot from `src/assets`, `Info` boxes, bio paragraph.
+- **Skills** (`components/skills`): `Languages` and `Tools` lists rendered from `content.json`.
+- **GitHubStats** (`components/github`): calls the public GitHub API for user `KaiDove1` (two unauthenticated requests per visit, 60/hour rate limit per IP) and renders `LeetCodeStats` inside the same section.
+- **LeetCodeStats** (`components/leetcode`): calls a third-party LeetCode stats API; the catch block provides a fallback when that API is down.
+- **Projects** (`components/projects`): cards from `content.json` → `projects`; each card opens a modal with details, `demoUrl` and `githubUrl`.
+- **Qualification** (`components/qualification`): Education / Experience tabs. The timeline text is hardcoded in the JSX, not in `content.json`.
+- **Certifications** (`components/certifications`): achievements list hardcoded in the component.
+- **Contact** (`components/contact`): EmailJS form plus email / LinkedIn / Messenger cards.
 
 ### Content Management
-All text content is centralized in `src/content.json`:
-- Portfolio information (name, bio, description)
-- Project details with icons, descriptions, and feature lists
-- Skills and language proficiency levels
-- Header navigation labels
 
-When updating content, edit this JSON file rather than individual components.
+Most copy lives in `src/content.json`: `Header` nav labels, `Biograph` (hero), `About`, `Info` boxes, `Languages`, `ToolsAndTechnologies`, and `projects`. `Qualification.jsx` and `Certifications.jsx` keep their own text. Edit the JSON rather than components where possible.
 
 ### EmailJS Integration
-Contact form uses EmailJS (`@emailjs/browser`) in `src/components/contact/Contact.jsx`:
-- Service ID: `service_rbeh4f4`
-- Template ID: `template_tp658as`
-- Public Key: `865Kd8FFdMX3gMGLy`
 
-Form fields: name, email, project (message textarea)
-
-### Key Dependencies
-- **React 18.2.0**: Core framework
-- **Three.js**: 3D background animation
-- **Swiper 10.2.0**: Carousel components (used in testimonials/projects)
-- **EmailJS**: Contact form email service
-- **GSAP 3.13.0**: Animation library
-- **react-icons 5.5.0**: Icon components
+`Contact.jsx` uses `@emailjs/browser` with `REACT_APP_EMAILJS_SERVICE_ID`, `REACT_APP_EMAILJS_TEMPLATE_ID` and `REACT_APP_EMAILJS_PUBLIC_KEY` from `.env` (template in `.env.example`). CRA inlines `REACT_APP_*` values into the public bundle at build time, so these are not secrets. Form fields: `name`, `email`, `project`.
 
 ### Theme System
-Theme is controlled via:
-1. `ThemeContext` React Context (src/context/ThemeContext.jsx)
-2. `data-theme` attribute on `<html>` element (set by ThemeContext)
-3. CSS variables respond to `[data-theme="dark"]` and `[data-theme="light"]`
-4. Background.js observes theme changes and updates Three.js material accordingly
 
-Access theme state in components:
+`src/context/ThemeContext.jsx` keeps `'light' | 'dark'` in localStorage under `portfolio-theme` and sets `data-theme` on `<html>`. CSS variables in `src/App.css` switch under `[data-theme="dark"]`. Components read the theme with:
+
 ```javascript
 import { useTheme } from './context/ThemeContext';
-const { isDark, toggleTheme } = useTheme();
+const { theme, isDark, toggleTheme } = useTheme();
 ```
 
 ### File Structure Conventions
-- Components follow folder-per-component pattern: `/components/[name]/[Name].jsx`
-- Each component folder contains its CSS: `/components/[name]/[name].css`
-- Case-sensitive: Component files use PascalCase, CSS files use lowercase
-- Data/helper components may also exist in component folders (e.g., `Data.jsx`, `Info.jsx`)
+
+- Folder-per-component: `src/components/<name>/<Name>.jsx` with `<name>.css` beside it (PascalCase JSX, lowercase CSS; the filesystem on CI is case-sensitive).
+- Global variables, base styles and the `.section`, `.container`, `.grid`, `.button` utilities live in `src/App.css`. Do not define global class names like `.grid` in a component stylesheet; every component CSS file is bundled into one global stylesheet.
+- Icons come from Boxicons (`bx` classes) and Unicons (`uil` classes), both loaded from CDNs in `public/index.html`.
 
 ## Important Notes
 
-- This is a Create React App project (react-scripts 5.0.1)
-- Homepage is configured for GitHub Pages subdirectory: `https://kaidove.github.io/website-portfolio`
-- All builds go to `/build` directory (gitignored)
-- The site uses boxicons (`bx` classes) for icons throughout the UI
-- Navigation state controls content visibility with CSS class `content-active` on wrapper
+- Create React App (react-scripts 5.0.1); builds go to `/build` (gitignored).
+- Key dependencies: React 18, `@emailjs/browser`, `web-vitals`, `gh-pages` (dev).
+- `valentines-photos/` is a gitignored local folder of personal photos; nothing in `main` uses it and it must never be copied into `public/`.

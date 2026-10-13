@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Claude Code temp dirs and local settings
+tmpclaude-*
+.claude/settings.local.json
+
+# personal photos kept out of the public build (used only by the valentines branch/stash)
+/valentines-photos/
