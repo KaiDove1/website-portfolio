@@ -68,6 +68,24 @@
   --shadow-color: rgba(0, 0, 0, 0.4);
 }
 
+/* Dark mode: borders and status colors that component stylesheets hardcode for light mode */
+[data-theme="dark"] .about__box,
+[data-theme="dark"] .skills__content,
+[data-theme="dark"] .services__content,
+[data-theme="dark"] .contact__card,
+[data-theme="dark"] .contact__form-input,
+[data-theme="dark"] .footer {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .contact__message--success {
+  color: #81c784;
+}
+
+[data-theme="dark"] .contact__message--error {
+  color: #e57373;
+}
+
 /* Responsive typography */
 @media screen and (max-width: 992px) {
   :root {

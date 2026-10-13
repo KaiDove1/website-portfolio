@@ -42,7 +42,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
-  color: #fff;
+  color: var(--container-color);
   margin-bottom: 0.5rem;
 }
 
