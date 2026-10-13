@@ -18,13 +18,13 @@
   "About": {
     "title": "About Me",
     "subtitle": "Engineering Impactful Software Solutions",
-    "description": "Computer Science graduate from the University of Virginia with extensive experience architecting full-stack applications, training deep learning models, and conducting research. Specialized in building scalable systems that process real-world data, from fintech platforms handling financial transactions to ML pipelines analyzing satellite imagery. Strong foundation in algorithms, data structures, and software engineering best practices. Proven ability to deliver measurable impact through clean, maintainable code and innovative problem-solving."
+    "description": "Computer Science graduate from the University of Virginia with experience architecting full-stack applications, training deep learning models, and conducting research. Specialized in building scalable systems that process real-world data, from fintech learning platforms to ML pipelines analyzing satellite imagery. Strong foundation in algorithms, data structures, and software engineering best practices. Proven ability to deliver measurable impact through clean, maintainable code and innovative problem-solving."
   },
   "Info": {
     "positionsTitle": "Experience",
     "positionsSubtitle": "Junior Software Developer @ LionPro.AI",
     "completedTitle": "Achievements",
-    "completedSubtitle": "Dean's List (6 Semesters)\n150+ LeetCode Problems",
+    "completedSubtitle": "Dean's List (6 Semesters)\n500+ LeetCode Problems",
     "studentTitle": "Education",
     "studentSubtitle": "B.S. Computer Science, UVA (2026)"
   },
@@ -58,9 +58,9 @@
       "insideTitle": "MedQuery - Medical Literature Search Tool",
       "description": "Stack: Python, LangChain, GPT-4, FAISS, Streamlit\\nRAG-based semantic search system",
       "details": [
-        "Built RAG-based tool using LangChain and GPT-4 for semantic search over 500+ PubMed abstracts with FAISS vector database, enabling natural language queries across medical research literature with 85% relevance accuracy.",
-        "Implemented custom embedding pipeline using sentence-transformers for domain-specific medical terminology, with semantic chunking strategy improving retrieval precision by 40% compared to keyword-based search.",
-        "Deployed to Streamlit Cloud serving 50+ student users with response caching and query optimization, reducing average search time from 8 seconds to 1.2 seconds through efficient vector similarity search."
+        "Built RAG-based tool using LangChain and GPT-4 for semantic search over 500+ PubMed abstracts with FAISS vector database, enabling natural language queries across medical research literature.",
+        "Implemented custom embedding pipeline using sentence-transformers for domain-specific medical terminology, with semantic chunking strategy improving retrieval precision over keyword-based search.",
+        "Deployed to Streamlit Cloud for student users with response caching and query optimization for fast vector similarity search."
       ],
       "demoUrl": "https://medquery-app.streamlit.app",
       "githubUrl": "https://github.com/KaiDove1/medquery"
@@ -72,8 +72,8 @@
       "insideTitle": "AI-Powered Precision Agriculture System",
       "description": "Stack: Python, TensorFlow, ResNet50, GIS\\nDeep learning for crop yield prediction",
       "details": [
-        "Collaborated with 2 teammates to build CNN pipeline using ResNet50 with attention pooling for county-level corn yield prediction, processing 10,000+ satellite images (NDVI, DEM, census data) through custom data fusion architecture.",
-        "Achieved R² of 0.92 on 150 counties across VA/MD/WV through hyperparameter tuning (Adam optimizer, learning rate scheduling), reducing RMSE by 20% and achieving F1 scores of 0.84+ across 8 crop classifications.",
+        "Collaborated with a capstone team to build CNN pipeline using ResNet50 with attention pooling for county-level corn yield prediction, processing satellite imagery, elevation and census data (NDVI, DEM) through custom data fusion architecture.",
+        "Evaluated on counties across VA/MD/WV with hyperparameter tuning (Adam optimizer, learning rate scheduling), and extended the model to classify multiple crop types.",
         "Presented at UVA CS Capstone Showcase demonstrating scalable ML inference pipeline generating actionable crop suitability heatmaps, enabling data-driven agricultural resource allocation and sustainability planning."
       ],
       "demoUrl": "",
@@ -84,10 +84,10 @@
       "icon": "bx bx-health",
       "outsidetitle": "Medical Imaging \\nML System",
       "insideTitle": "Deep Learning Brain Tumor Segmentation System",
-      "description": "Stack: Python, TensorFlow, U-Net, OpenCV\\nReal-time medical image analysis",
+      "description": "Stack: Python, TensorFlow, U-Net, OpenCV\\nMedical image analysis",
       "details": [
-        "Implemented U-Net architecture for brain tumor segmentation on 200 manually-annotated MRI scans as part of UVA Medical Image Analysis Lab, achieving Dice coefficient improvement from 0.78 to 0.84 on validation set.",
-        "Integrated patient data via secure HIPAA-compliant APIs with comprehensive error handling, implementing data augmentation techniques (rotation, flipping, elastic deformation) to improve model generalization across imaging protocols.",
+        "Implemented U-Net architecture for brain tumor segmentation on 200 manually-annotated MRI scans as part of UVA Medical Image Analysis Lab, improving the Dice coefficient over the baseline on the validation set.",
+        "Integrated imaging data via secure APIs with comprehensive error handling, implementing data augmentation techniques (rotation, flipping, elastic deformation) to improve model generalization across imaging protocols.",
         "Presented findings at UVA Engineering Research Symposium (November 2023), comparing 3 CNN architectures (U-Net, V-Net, ResUNet) for medical image segmentation with quantitative performance metrics."
       ],
       "demoUrl": "",
@@ -100,9 +100,9 @@
       "insideTitle": "Beli - Restaurant Tracking & Discovery App",
       "description": "Stack: React, TypeScript, Tailwind CSS, Vite\\nModern restaurant tracking web application",
       "details": [
-        "Built full-stack restaurant discovery platform with React 18 and TypeScript featuring feed system, search functionality, and user authentication. Implemented Context API for state management handling 12+ mock restaurants with real-time filtering and CRUD operations.",
+        "Built a restaurant discovery front end with React 18 and TypeScript featuring feed system, search functionality, and user authentication. Implemented Context API for state management over mock restaurant data with real-time filtering and CRUD operations.",
         "Engineered responsive UI with Tailwind CSS supporting mobile, tablet, and desktop viewports. Created reusable component library (Button, Card, Input) with consistent design system featuring smooth animations and hover effects.",
-        "Architected clean component structure with React Router v6 for navigation across 5+ pages (Feed, Add, Detail, Discover, Auth). Designed for easy backend integration with PostgreSQL and JWT authentication ready for production deployment."
+        "Architected clean component structure with React Router v6 for navigation across 5+ pages (Feed, Add, Detail, Discover, Auth). Designed for future backend integration with PostgreSQL and JWT authentication."
       ],
       "demoUrl": "",
       "githubUrl": "https://github.com/KaiDove1/beli-replica"
@@ -114,9 +114,9 @@
       "insideTitle": "Personal Portfolio Website with Real-Time Stats",
       "description": "Stack: React, JavaScript, CSS3, EmailJS\\nInteractive developer portfolio",
       "details": [
-        "Developed responsive portfolio website with React featuring dark mode toggle, real-time GitHub API integration displaying contribution stats and repository data, and LeetCode stats integration showing 150+ solved problems with difficulty breakdown.",
-        "Built comprehensive project showcase with modal views, live demo links, and GitHub repository integration. Implemented EmailJS for contact form with validation and success/error handling, achieving 100% form submission success rate.",
-        "Created dynamic achievements section highlighting Dean's List honors, open source contributions to Hugging Face Transformers, and research presentations. Optimized for SEO and accessibility with responsive design supporting all device sizes."
+        "Developed responsive portfolio website with React featuring dark mode toggle, real-time GitHub API integration displaying contribution stats and repository data, and LeetCode stats integration with difficulty breakdown.",
+        "Built comprehensive project showcase with modal views, live demo links, and GitHub repository integration. Implemented EmailJS for contact form with validation and success/error handling.",
+        "Created dynamic achievements section highlighting Dean's List honors, open source contributions to Hugging Face Transformers, and research presentations. Responsive design supporting all device sizes."
       ],
       "demoUrl": "https://kaidove1.github.io/website-portfolio",
       "githubUrl": "https://github.com/KaiDove1/website-portfolio"
@@ -125,12 +125,12 @@
       "id": 6,
       "icon": "bx bx-line-chart",
       "outsidetitle": "Investiverse \\nFintech Platform",
-      "insideTitle": "Investiverse - AI-Powered Stock Learning Platform",
+      "insideTitle": "Investiverse - Stock Learning Platform",
       "description": "Stack: PHP, JavaScript, PostgreSQL, Docker\\nFull-stack fintech education platform",
       "details": [
-        "Architected full-stack fintech platform with microservices architecture using PHP backend, PostgreSQL database, and Docker containerization. Implemented real-time stock market simulator with WebSocket connections processing concurrent user requests with 99.9% uptime.",
-        "Built OAuth 2.0 authentication system with JWT session management and role-based access control (RBAC) ensuring enterprise-grade security compliance. Optimized database queries with indexing reducing response times by 35%.",
-        "Engineered responsive dashboards with Chart.js visualizations and community forums using AJAX, driving 40% increase in user engagement through gamified investment challenges and peer-to-peer learning features."
+        "Architected full-stack fintech platform using a PHP backend, PostgreSQL database, and Docker containerization. Implemented real-time stock market simulator with WebSocket connections handling concurrent user requests.",
+        "Built OAuth 2.0 authentication system with JWT session management and role-based access control (RBAC). Optimized database queries with indexing.",
+        "Engineered responsive dashboards with Chart.js visualizations and community forums using AJAX, with gamified investment challenges and peer-to-peer learning features."
       ],
       "demoUrl": "",
       "githubUrl": "https://github.com/KaiDove1/investiverse"

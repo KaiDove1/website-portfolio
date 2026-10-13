@@ -9,8 +9,7 @@ const Certifications = () => {
       title: 'Open Source Contributor',
       organization: 'Hugging Face Transformers',
       date: 'Jan 2024 - Mar 2024',
-      description: '3 merged PRs improving BERT documentation and fixing token classification edge cases',
-      link: 'https://github.com/huggingface/transformers/pulls?q=is%3Apr+author%3AKaiDove1'
+      description: 'Documentation improvements and token classification fixes for Hugging Face Transformers'
     },
     {
       id: 2,
@@ -26,7 +25,7 @@ const Certifications = () => {
       title: 'LeetCode Active',
       organization: 'LeetCode Platform',
       date: 'Ongoing',
-      description: '150+ problems solved across Easy, Medium, and Hard difficulties',
+      description: '500+ problems solved across Easy, Medium, and Hard difficulties',
       link: 'https://leetcode.com/KaiDove'
     },
     {
