@@ -38,7 +38,7 @@ const Qualification = () => {
                         <div className="qualification__data">
                             <div>
                                 <h3 className="qualification__title">University of Virginia</h3>
-                                <span className="qualification__subtitle">B.S. Computer Science | GPA: 3.84</span>
+                                <span className="qualification__subtitle">B.S. Computer Science</span>
                                 <div className="qualification__calender">
                                     <i className="uil uil-calendar-alt"></i> August 2022 - May 2026
                                 </div>
