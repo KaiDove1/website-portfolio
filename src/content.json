@@ -29,44 +29,26 @@
     "studentSubtitle": "B.S. Computer Science @ UVA"
   },
   "Languages": {
-    "Programming Languages": {
-      "title1": "Python", 
-      "level1": "Expert",
-      "title2": "Java", 
-      "level2": "Advanced",
-      "title3": "HTML", 
-      "level3": "Advanced",
-      "title4": "CSS", 
-      "level4": "Advanced" ,
-      "title5": "TypeScript", 
-      "level5": "Advanced" ,
-      "title6": "JavaScript", 
-      "level6": "Intermediate" ,
-      "title7": "SQL", 
-      "level7": "Intermediate" ,
-      "title8": "C++", 
-      "level8": "Intermediate" 
-    }
+    "Programming Languages": [
+      { "name": "Python", "icon": "bx bxl-python" },
+      { "name": "Java", "icon": "bx bxl-java" },
+      { "name": "HTML", "icon": "bx bxl-html5" },
+      { "name": "CSS", "icon": "bx bxl-css3" },
+      { "name": "TypeScript", "icon": "bx bxl-typescript" },
+      { "name": "JavaScript", "icon": "bx bxl-javascript" },
+      { "name": "SQL", "icon": "bx bx-data" },
+      { "name": "C++", "icon": "bx bxl-c-plus-plus" }
+    ]
   },
   "ToolsAndTechnologies": {
-    "Tools": {
-      "title1": "Git",
-      "level1": "Expert",
-      "title2": "Django",
-      "level2": "Expert",
-      "title3": "TensorFlow",
-      "level3": "Expert",
-      "title4": "LangChain",
-      "level4": "Advanced",
-      "title5": "AWS (EC2/S3)",
-      "level5": "Advanced",
-      "title6": "Docker",
-      "level6": "Advanced",
-      "title7": "React/Node.js",
-      "level7": "Advanced",
-      "title8": "PostgreSQL",
-      "level8": "Advanced"
-    }
+    "Tools": [
+      { "name": "Git", "icon": "bx bxl-git" },
+      { "name": "TensorFlow", "icon": "bx bx-network-chart" },
+      { "name": "LangChain", "icon": "bx bx-link-alt" },
+      { "name": "Docker", "icon": "bx bxl-docker" },
+      { "name": "React/Node.js", "icon": "bx bxl-react" },
+      { "name": "PostgreSQL", "icon": "bx bxl-postgresql" }
+    ]
   },
   "projects": [
     {
