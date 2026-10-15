@@ -9,6 +9,7 @@
 /coverage
 
 # production
+/dist
 /build
 
 # misc
@@ -26,5 +27,4 @@ yarn-error.log*
 tmpclaude-*
 .claude/settings.local.json
 
-# personal photos kept out of the public build (used only by the valentines branch/stash)
-/valentines-photos/
+.inspiration.md
