@@ -28,3 +28,6 @@ tmpclaude-*
 .claude/settings.local.json
 
 .inspiration.md
+
+# local visual-check output (scripts/screenshots.js)
+/screenshots

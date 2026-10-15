@@ -1,10 +1,10 @@
 import { ThemeProvider } from './context/ThemeContext';
-import Hero from './components/hero/Hero';
+import Shell from './components/shell/Shell';
 
 export default function App() {
   return (
     <ThemeProvider>
-      <Hero />
+      <Shell />
     </ThemeProvider>
   );
 }

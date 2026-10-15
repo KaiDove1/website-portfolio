@@ -9,11 +9,26 @@
     />
     <title>Kai Dove | AI &amp; Machine Learning Engineer</title>
 
-    <!-- Inter: thin weights for the hero, regular for body text -->
+    <!-- Apply the saved theme and font before first paint so there is no flash. Mirrors ThemeContext. -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var theme, font;
+        try { theme = localStorage.getItem('portfolio-theme'); font = localStorage.getItem('portfolio-font'); } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        if (font !== 'sans' && font !== 'mono') font = 'sans';
+        root.setAttribute('data-theme', theme);
+        root.setAttribute('data-font', font);
+      })();
+    </script>
+
+    <!-- Inter for the default face, JetBrains Mono for Monospaced mode -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=JetBrains+Mono:wght@200;400;600&display=swap"
       rel="stylesheet"
     />
   </head>

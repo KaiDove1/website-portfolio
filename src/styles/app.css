@@ -1,51 +1,65 @@
 /* Single global stylesheet: Tailwind + design tokens + a few base rules.
    Components style themselves with utility classes in their JSX. */
+
 /* source("../") = scan only src/ for classes, not Markdown or config files at the root. */
 @import "tailwindcss" source("../");
 
 /* Runtime tokens. These are the only place colors are defined.
    They switch when ThemeContext sets data-theme on <html>. */
 :root {
-  --surface: hsl(0 0% 98%);  /* page background */
-  --ink: hsl(0 0% 46%);      /* body text */
-  --heading: hsl(0 0% 20%);  /* headings */
+  --surface: hsl(0 0% 90%);  /* page background (light) */
+  --ink: hsl(0 0% 10%);      /* text (light) */
 }
 
 [data-theme="dark"] {
-  --surface: hsl(0 0% 8%);
-  --ink: hsl(0 0% 75%);
-  --heading: hsl(0 0% 95%);
+  --surface: hsl(0 0% 5%);
+  --ink: hsl(0 0% 95%);
 }
 
-/* `dark:` utilities follow the data-theme attribute, not the OS setting. */
+/* Variants keyed to the <html> attributes set by ThemeContext (not to the OS). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant mono (&:where([data-font="mono"], [data-font="mono"] *));
 
-/* Expose the tokens to Tailwind: bg-surface, text-ink, text-heading, font-sans, ease-smooth.
+/* Expose the tokens to Tailwind: bg-surface, text-ink, font-sans, font-mono, ease-smooth.
    `inline` makes the utilities reference the runtime variable, so theme switching works. */
 @theme inline {
   --color-surface: var(--surface);
   --color-ink: var(--ink);
-  --color-heading: var(--heading);
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --ease-smooth: cubic-bezier(0.1, 0.4, 0.2, 1);
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  html,
+  body {
+    height: 100%;
+    overscroll-behavior: none;
   }
 
   body {
+    overflow: hidden;                 /* the shell is fixed; pages scroll inside the frame */
     background-color: var(--surface);
     color: var(--ink);
     font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 600;
+    font-feature-settings: "palt";
     -webkit-font-smoothing: antialiased;
-    transition: background-color 0.9s var(--ease-smooth), color 0.9s var(--ease-smooth);
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: none;
   }
 
-  h1,
-  h2,
-  h3 {
-    color: var(--heading);
+  [data-font="mono"] body {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Hide scrollbars on the in-frame page scroller while keeping it scrollable. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

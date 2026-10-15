@@ -1,0 +1,134 @@
+import { useEffect, useRef, useState } from 'react';
+import { BACKGROUND } from '../../config.js';
+import content from '../../content/content.json';
+import { useTheme } from '../../context/ThemeContext';
+import { usePage } from '../../hooks/usePage';
+import NoiseBackground from '../background/NoiseBackground.js';
+import IcosahedronBackground from '../background/IcosahedronBackground.js';
+import SiteHeader from './SiteHeader.jsx';
+import ThemeSwitch from './ThemeSwitch.jsx';
+import EnterOverlay from './EnterOverlay.jsx';
+import PageOutlet from './PageOutlet.jsx';
+
+/**
+ * The fixed, framed viewport everything lives in. Layers, bottom to top:
+ *   0  canvas host      the WebGL background, inset by --pad (same box as the frame)
+ *   10 page layer       the in-frame scroller holding the current page; blended with
+ *                       `difference` so white text reads dark on light and light on dark
+ *   20 gutter masks     translucent surface strips so scrolled content fades under the gutters
+ *   30 frame            the 1px line, 50% white under the same blend
+ *   40 header / switch / copyright
+ *   50 enter overlay    the first-load curtain
+ * `--pad` is defined once here; every child measures from it.
+ * The header and switch come first in the JSX so keyboard users reach the nav before the
+ * page content; z-index, not DOM order, decides what paints on top.
+ * The scroller's inner box is a one-cell grid: a grid item stretches to the box's full
+ * (min-)height, whereas a plain `min-h-full` child of a min-height-only parent computes
+ * to 0 and every absolutely positioned block in the pages would collapse to the top.
+ * The scroller is focusable (tabIndex -1) and receives focus after the curtain lifts and on
+ * every page change, so arrow keys and space scroll the frame without a click first.
+ * Which background class mounts is decided by `BACKGROUND` in src/config.js. The class is
+ * created once, told about theme/font changes through setTheme/setStyle, paused while the
+ * tab is hidden, and disposed on unmount (StrictMode runs this twice in dev; that is fine).
+ */
+const BACKGROUNDS = {
+  noise: NoiseBackground,
+  icosahedron: IcosahedronBackground,
+};
+
+export default function Shell() {
+  const { isDark, isMono } = useTheme();
+  const page = usePage();
+  const hostRef = useRef(null);
+  const scrollerRef = useRef(null);
+  const bgRef = useRef(null);
+  const [ready, setReady] = useState(false);
+
+  // Mount the background once; pause it while the tab is hidden.
+  useEffect(() => {
+    const Background = BACKGROUNDS[BACKGROUND] ?? BACKGROUNDS.noise;
+    const host = hostRef.current;
+    if (!host || !Background) return undefined;
+
+    const bg = new Background(host);
+    bgRef.current = bg;
+    bg.init();
+
+    const onVisibility = () => {
+      if (document.hidden) bg.stop();
+      else bg.start();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility);
+      bg.dispose();
+      if (bgRef.current === bg) bgRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    bgRef.current?.setTheme?.(isDark);
+  }, [isDark]);
+
+  useEffect(() => {
+    bgRef.current?.setStyle?.(isMono);
+  }, [isMono]);
+
+  // Once the curtain lifts, keyboard focus goes to the scroller.
+  useEffect(() => {
+    if (ready) scrollerRef.current?.focus({ preventScroll: true });
+  }, [ready]);
+
+  return (
+    <div className="fixed inset-0 overflow-hidden bg-surface isolate transition-colors duration-[900ms] ease-smooth [--pad:max(20px,4vmin)]">
+      {/* 0: WebGL canvas, sized by its host */}
+      <div ref={hostRef} aria-hidden="true" className="absolute inset-(--pad) z-0 pointer-events-none *:size-full" />
+
+      {/* 40: chrome (first in DOM order so Tab reaches the nav before the page content) */}
+      <SiteHeader />
+      <ThemeSwitch />
+
+      {/* 10: blended page layer with the in-frame scroller */}
+      <main
+        className={`absolute inset-0 z-10 mix-blend-difference text-white transition-opacity duration-[600ms] ease-smooth motion-reduce:transition-none ${
+          ready ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <div
+          ref={scrollerRef}
+          tabIndex={-1}
+          className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-none overscroll-contain outline-none"
+        >
+          <div className="relative min-h-full grid">
+            <PageOutlet page={page} scrollerRef={scrollerRef} />
+          </div>
+        </div>
+      </main>
+
+      {/* 20: gutter masks */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 top-0 h-(--pad) bg-surface/90 z-20 transition-colors duration-[900ms] ease-smooth"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 bottom-0 h-(--pad) bg-surface/90 z-20 transition-colors duration-[900ms] ease-smooth"
+      />
+
+      {/* 30: the frame */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-(--pad) z-30 border border-white/50 mix-blend-difference"
+      />
+
+      {/* 40: copyright in the bottom gutter */}
+      <p className="absolute z-40 left-(--pad) bottom-[calc(var(--pad)*0.5-0.5em)] text-[80%] opacity-50 mix-blend-difference text-white max-sm:hidden">
+        {content.site.copyright}
+      </p>
+
+      {/* 50: first-load curtain */}
+      <EnterOverlay onLeave={() => setReady(true)} />
+    </div>
+  );
+}

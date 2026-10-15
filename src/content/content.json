@@ -1,62 +1,41 @@
 {
-  "Header": {
-    "logoText": "Kai",
-    "navLocation1": "Home",
-    "navLocation2": "About",
-    "navLocation3": "Skills",
-    "navLocation4": "GitHub",
-    "navLocation5": "Projects",
-    "navLocation6": "Experience",
-    "navLocation7": "Achievements",
-    "navLocation8": "Contact"
+  "site": {
+    "name": "Kai Dove",
+    "label": "AI & Machine Learning Engineer",
+    "copyright": "© Kai Dove",
+    "enter": { "name": "Kai Dove", "word": "Portfolio" },
+    "theme": { "light": "Light", "dark": "Dark", "mono": "Monospaced" },
+    "labels": { "github": "GitHub" }
   },
-  "Biograph":{
-    "title": "Kai Dove",
-    "subtitle": "AI & Machine Learning Engineer",
-    "description": "B.S. Computer Science, University of Virginia | Building production ML systems and scalable web applications | Experienced in Python, React, TensorFlow, and cloud architecture"
-  },
-  "About": {
-    "title": "About Me",
-    "subtitle": "Engineering Impactful Software Solutions",
-    "description": "Computer Science graduate from the University of Virginia with experience architecting full-stack applications, training deep learning models, and conducting research. Specialized in building scalable systems that process real-world data, from fintech learning platforms to ML pipelines analyzing satellite imagery. Strong foundation in algorithms, data structures, and software engineering best practices. Proven ability to deliver measurable impact through clean, maintainable code and innovative problem-solving."
-  },
-  "Info": {
-    "positionsTitle": "Experience",
-    "positionsSubtitle": "Junior Software Developer @ LionPro.AI",
-    "completedTitle": "Achievements",
-    "completedSubtitle": "Dean's List (6 Semesters)\n500+ LeetCode Problems",
-    "studentTitle": "Education",
-    "studentSubtitle": "B.S. Computer Science, UVA (2026)"
-  },
-  "Languages": {
-    "Programming Languages": [
-      { "name": "Python", "icon": "bx bxl-python" },
-      { "name": "Java", "icon": "bx bxl-java" },
-      { "name": "HTML", "icon": "bx bxl-html5" },
-      { "name": "CSS", "icon": "bx bxl-css3" },
-      { "name": "TypeScript", "icon": "bx bxl-typescript" },
-      { "name": "JavaScript", "icon": "bx bxl-javascript" },
-      { "name": "SQL", "icon": "bx bx-data" },
-      { "name": "C++", "icon": "bx bxl-c-plus-plus" }
+
+  "nav": [
+    { "id": "home", "label": "Home" },
+    { "id": "projects", "label": "Projects" },
+    { "id": "experience", "label": "Experience" },
+    { "id": "info", "label": "Info" },
+    { "id": "contact", "label": "Contact" }
+  ],
+
+  "home": {
+    "bio": [
+      "Computer Science graduate",
+      "from the University of Virginia.",
+      "I build production ML systems",
+      "and scalable web applications,",
+      "from fintech learning platforms",
+      "to pipelines that read satellite imagery.",
+      "Currently a Junior Software Developer",
+      "at LionPro.AI."
     ]
   },
-  "ToolsAndTechnologies": {
-    "Tools": [
-      { "name": "Git", "icon": "bx bxl-git" },
-      { "name": "TensorFlow", "icon": "bx bx-network-chart" },
-      { "name": "LangChain", "icon": "bx bx-link-alt" },
-      { "name": "Docker", "icon": "bx bxl-docker" },
-      { "name": "React/Node.js", "icon": "bx bxl-react" },
-      { "name": "PostgreSQL", "icon": "bx bxl-postgresql" }
-    ]
-  },
+
   "projects": [
     {
-      "id": 1,
-      "icon": "bx bx-brain",
-      "outsidetitle": "MedQuery \\nRAG Search Tool",
-      "insideTitle": "MedQuery - Medical Literature Search Tool",
-      "description": "Stack: Python, LangChain, GPT-4, FAISS, Streamlit\\nRAG-based semantic search system",
+      "id": "medquery",
+      "name": "MedQuery",
+      "year": null,
+      "stack": "Python, LangChain, GPT-4, FAISS",
+      "summary": "RAG-based semantic search over 500+ PubMed abstracts.",
       "details": [
         "Built RAG-based tool using LangChain and GPT-4 for semantic search over 500+ PubMed abstracts with FAISS vector database, enabling natural language queries across medical research literature.",
         "Implemented custom embedding pipeline using sentence-transformers for domain-specific medical terminology, with semantic chunking strategy improving retrieval precision over keyword-based search.",
@@ -66,11 +45,11 @@
       "githubUrl": "https://github.com/KaiDove1/medquery"
     },
     {
-      "id": 2,
-      "icon": "bx bx-map-alt",
-      "outsidetitle": "Geospatial Crop \\nYield Prediction",
-      "insideTitle": "AI-Powered Precision Agriculture System",
-      "description": "Stack: Python, TensorFlow, ResNet50, GIS\\nDeep learning for crop yield prediction",
+      "id": "crop-yield",
+      "name": "Crop Yield Prediction",
+      "year": "2024",
+      "stack": "Python, TensorFlow, ResNet50, GIS",
+      "summary": "CNN pipeline predicting county-level corn yield from satellite imagery.",
       "details": [
         "Collaborated with a capstone team to build CNN pipeline using ResNet50 with attention pooling for county-level corn yield prediction, processing satellite imagery, elevation and census data (NDVI, DEM) through custom data fusion architecture.",
         "Evaluated on counties across VA/MD/WV with hyperparameter tuning (Adam optimizer, learning rate scheduling), and extended the model to classify multiple crop types.",
@@ -80,11 +59,11 @@
       "githubUrl": "https://github.com/KaiDove1/crop-yield-prediction"
     },
     {
-      "id": 3,
-      "icon": "bx bx-health",
-      "outsidetitle": "Medical Imaging \\nML System",
-      "insideTitle": "Deep Learning Brain Tumor Segmentation System",
-      "description": "Stack: Python, TensorFlow, U-Net, OpenCV\\nMedical image analysis",
+      "id": "brain-tumor",
+      "name": "Brain Tumor Segmentation",
+      "year": "2023",
+      "stack": "Python, TensorFlow, U-Net, OpenCV",
+      "summary": "U-Net segmentation on annotated MRI scans at the UVA Medical Image Analysis Lab.",
       "details": [
         "Implemented U-Net architecture for brain tumor segmentation on 200 manually-annotated MRI scans as part of UVA Medical Image Analysis Lab, improving the Dice coefficient over the baseline on the validation set.",
         "Integrated imaging data via secure APIs with comprehensive error handling, implementing data augmentation techniques (rotation, flipping, elastic deformation) to improve model generalization across imaging protocols.",
@@ -94,11 +73,11 @@
       "githubUrl": "https://github.com/KaiDove1/brain-tumor-segmentation"
     },
     {
-      "id": 4,
-      "icon": "bx bx-restaurant",
-      "outsidetitle": "Beli \\nRestaurant App",
-      "insideTitle": "Beli - Restaurant Tracking & Discovery App",
-      "description": "Stack: React, TypeScript, Tailwind CSS, Vite\\nModern restaurant tracking web application",
+      "id": "beli",
+      "name": "Beli",
+      "year": null,
+      "stack": "React, TypeScript, Tailwind CSS, Vite",
+      "summary": "Restaurant tracking and discovery front end.",
       "details": [
         "Built a restaurant discovery front end with React 18 and TypeScript featuring feed system, search functionality, and user authentication. Implemented Context API for state management over mock restaurant data with real-time filtering and CRUD operations.",
         "Engineered responsive UI with Tailwind CSS supporting mobile, tablet, and desktop viewports. Created reusable component library (Button, Card, Input) with consistent design system featuring smooth animations and hover effects.",
@@ -108,25 +87,25 @@
       "githubUrl": "https://github.com/KaiDove1/beli-replica"
     },
     {
-      "id": 5,
-      "icon": "bx bx-code-block",
-      "outsidetitle": "Portfolio \\nWebsite",
-      "insideTitle": "Personal Portfolio Website with Real-Time Stats",
-      "description": "Stack: React, JavaScript, CSS3, EmailJS\\nInteractive developer portfolio",
+      "id": "portfolio",
+      "name": "Portfolio",
+      "year": "2026",
+      "stack": "React, Vite, Tailwind CSS, Three.js",
+      "summary": "This site: a framed single page with a WebGL background.",
       "details": [
-        "Developed responsive portfolio website with React featuring dark mode toggle, real-time GitHub API integration displaying contribution stats and repository data, and LeetCode stats integration with difficulty breakdown.",
-        "Built comprehensive project showcase with modal views, live demo links, and GitHub repository integration. Implemented EmailJS for contact form with validation and success/error handling.",
-        "Created dynamic achievements section highlighting Dean's List honors, open source contributions to Hugging Face Transformers, and research presentations. Responsive design supporting all device sizes."
+        "Rebuilt from scratch on Vite and React 19 with Tailwind v4, replacing a Create React App template.",
+        "Framed layout with a custom GLSL noise background, in-frame page switching, light, dark and monospaced modes.",
+        "All copy and data live in one JSON file; the architecture is documented in the repo."
       ],
       "demoUrl": "https://kaidove1.github.io/website-portfolio",
       "githubUrl": "https://github.com/KaiDove1/website-portfolio"
     },
     {
-      "id": 6,
-      "icon": "bx bx-line-chart",
-      "outsidetitle": "Investiverse \\nFintech Platform",
-      "insideTitle": "Investiverse - Stock Learning Platform",
-      "description": "Stack: PHP, JavaScript, PostgreSQL, Docker\\nFull-stack fintech education platform",
+      "id": "investiverse",
+      "name": "Investiverse",
+      "year": null,
+      "stack": "PHP, JavaScript, PostgreSQL, Docker",
+      "summary": "Full-stack stock learning platform with a real-time market simulator.",
       "details": [
         "Architected full-stack fintech platform using a PHP backend, PostgreSQL database, and Docker containerization. Implemented real-time stock market simulator with WebSocket connections handling concurrent user requests.",
         "Built OAuth 2.0 authentication system with JWT session management and role-based access control (RBAC). Optimized database queries with indexing.",
@@ -135,6 +114,45 @@
       "demoUrl": "",
       "githubUrl": "https://github.com/KaiDove1/investiverse"
     }
-  ]
-  
+  ],
+
+  "experience": [
+    { "title": "Junior Software Developer", "org": "LionPro.AI (Lion Federal)", "period": "Aug 2025 – Present", "kind": "work" },
+    { "title": "Software Engineer Intern", "org": "Lion Federal", "period": "May 2025 – Aug 2025", "kind": "work" },
+    { "title": "Teaching Assistant", "org": "University of Virginia, Advanced Software Engineering", "period": "Aug 2024 – May 2026", "kind": "work" },
+    { "title": "Software Engineer Intern", "org": "Electric On Ramp", "period": "May 2024 – Aug 2024", "kind": "work" },
+    { "title": "Research Assistant", "org": "UVA Medical Image Analysis Lab", "period": "May 2023 – Aug 2023", "kind": "work" },
+    { "title": "B.S. Computer Science", "org": "University of Virginia", "period": "Aug 2022 – May 2026", "kind": "education" },
+    { "title": "High School Diploma", "org": "Forest Park High School", "period": "Aug 2018 – May 2022", "kind": "education" }
+  ],
+
+  "info": {
+    "headings": { "links": "Links", "skills": "Skills", "achievements": "Achievements" },
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/KaiDove1" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/kai-dove-5b02b2243/" },
+      { "label": "LeetCode", "href": "https://leetcode.com/KaiDove/" },
+      { "label": "Resume", "file": "resume.pdf", "download": "Kai_Dove_Resume.pdf" }
+    ],
+    "achievements": [
+      { "title": "Open Source Contributor", "detail": "Hugging Face Transformers, Jan–Mar 2024" },
+      { "title": "Dean's List", "detail": "University of Virginia, 6 semesters" },
+      { "title": "500+ LeetCode Problems", "detail": "Easy, Medium and Hard, ongoing" },
+      { "title": "Research Presenter", "detail": "UVA Engineering Symposium, Nov 2023" },
+      { "title": "Capstone Showcase", "detail": "UVA CS Department, Dec 2024" }
+    ],
+    "skills": [
+      { "label": "Languages", "items": ["Python", "Java", "TypeScript", "JavaScript", "SQL", "C++", "HTML", "CSS"] },
+      { "label": "Tools", "items": ["TensorFlow", "LangChain", "React / Node.js", "PostgreSQL", "Docker", "Git"] }
+    ]
+  },
+
+  "contact": {
+    "links": [
+      { "label": "Say hello", "href": "mailto:kaidove.tech@gmail.com" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/kai-dove-5b02b2243/" },
+      { "label": "GitHub", "href": "https://github.com/KaiDove1" },
+      { "label": "LeetCode", "href": "https://leetcode.com/KaiDove/" }
+    ]
+  }
 }

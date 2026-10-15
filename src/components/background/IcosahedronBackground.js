@@ -9,7 +9,7 @@ const THEME = {
  * Rotating icosahedron wireframe rendered into a container element.
  * Sizes itself to the container (not the window), so it fits the hero's inner frame.
  */
-class Background {
+class IcosahedronBackground {
   constructor(container) {
     this.container = container;
     this.scene = null;
@@ -79,6 +79,9 @@ class Background {
     if (!this.rafId) this.renderFrame();
   }
 
+  // The wireframe has no pixelated variant; the method exists so Shell can call it on either class.
+  setStyle() {}
+
   handleResize() {
     if (!this.renderer) return;
     const width = this.container.clientWidth;
@@ -143,4 +146,4 @@ class Background {
   }
 }
 
-export default Background;
+export default IcosahedronBackground;
