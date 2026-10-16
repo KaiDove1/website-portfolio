@@ -10,24 +10,27 @@
  *   node scripts/screenshots.js round3     → screenshots/round3/*.png
  *   NO_SPAWN=1 node scripts/screenshots.js → use an already running `vite preview --port 4175`
  */
-const path = require('path');
-const fs = require('fs');
-const { spawn, execSync } = require('child_process');
+import path from 'path';
+import fs from 'fs';
+import { spawn, execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
+// package.json sets "type": "module", so this file is an ES module (import, not require).
 let chromium;
 try {
-  ({ chromium } = require('playwright'));
+  ({ chromium } = await import('playwright'));
 } catch {
   console.error('playwright is not installed. Run: npm install --no-save playwright && npx playwright install chromium');
   process.exit(2);
 }
 
-const REPO = path.resolve(__dirname, '..');
+const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(REPO, 'screenshots', process.argv[2] || 'latest');
 const PORT = 4175;
 const BASE = `http://localhost:${PORT}/website-portfolio/`;
 const PAGES = ['home', 'projects', 'experience', 'info', 'contact'];
 const hashFor = (p) => (p === 'home' ? '#/' : `#/${p}`);
+const QUICK_LINKS_LABEL = JSON.parse(fs.readFileSync(path.join(REPO, 'src/content/content.json'), 'utf8')).site.labels.quickLinks;
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -90,10 +93,14 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
       if (!up) throw new Error('preview server did not start');
     }
 
-    async function shot(name, { theme = 'light', font = 'sans', hash = '#/', viewport } = {}) {
+    async function shot(name, { theme = 'light', font = 'sans', hash = '#/', viewport, scroll = 0 } = {}) {
       const { ctx, page } = await newPage({ theme, font, viewport });
       await page.goto(BASE + hash, { waitUntil: 'networkidle' });
       await page.waitForTimeout(2600); // let the enter overlay finish and the first frames render
+      if (scroll) {
+        await page.evaluate((y) => document.querySelector('main [tabindex="-1"]').scrollBy(0, y), scroll);
+        await page.waitForTimeout(100);
+      }
       const file = path.join(OUT, `${name}.png`);
       await page.screenshot({ path: file });
       summary.shots.push(file);
@@ -108,6 +115,9 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await shot('projects-mobile', { viewport: { width: 390, height: 844 }, hash: '#/projects' });
     await shot('info-mobile', { viewport: { width: 390, height: 844 }, hash: '#/info' });
     await shot('home-tablet', { viewport: { width: 820, height: 1180 } });
+    await shot('info-laptop', { viewport: { width: 1280, height: 720 }, hash: '#/info' });
+    await shot('projects-scrolled', { hash: '#/projects', scroll: 240 });
+    await shot('projects-mobile-scrolled', { viewport: { width: 390, height: 844 }, hash: '#/projects', scroll: 240 });
 
     // Behaviour checks at desktop size, light theme, in a fresh context
     const { page } = await newPage();
@@ -160,6 +170,39 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
       await rp.waitForTimeout(1500);
       summary.checks.reducedMotionCanvas = await rp.locator('canvas').count();
       await rp.screenshot({ path: path.join(OUT, 'home-reduced-motion.png') });
+      await ctx.close();
+    }
+    // Quick links: attributes once, then on every page at three sizes list any page text whose
+    // box overlaps the corner icons at load (scrolled overlap is expected and not counted).
+    {
+      const { ctx, page: qp } = await newPage();
+      await qp.goto(BASE + '#/', { waitUntil: 'networkidle' });
+      await qp.waitForTimeout(2600);
+      summary.checks.quickLinks = await qp.evaluate((label) => [...document.querySelectorAll(`ul[aria-label="${label}"] a`)]
+        .map((a) => `${a.getAttribute('aria-label')} ${a.href} target=${a.target} rel=${a.rel}`), QUICK_LINKS_LABEL);
+      await ctx.close();
+    }
+    summary.checks.quickLinksOverlap = {};
+    for (const viewport of [{ width: 1440, height: 900 }, { width: 1280, height: 720 }, { width: 390, height: 844 }]) {
+      const { ctx, page: qp } = await newPage({ viewport });
+      await qp.goto(BASE + '#/', { waitUntil: 'networkidle' });
+      await qp.waitForTimeout(2600);
+      for (const p of PAGES) {
+        await qp.evaluate((h) => { location.hash = h; }, hashFor(p));
+        await qp.waitForTimeout(900);
+        const hits = await qp.evaluate((label) => {
+          const list = document.querySelector(`ul[aria-label="${label}"]`);
+          if (!list) return ['missing'];
+          const r = list.getBoundingClientRect();
+          return [...document.querySelectorAll('main a, main h2, main p, main li, main dt, main dd')]
+            .filter((el) => {
+              const b = el.getBoundingClientRect();
+              return b.width && b.height && b.left < r.right && b.right > r.left && b.top < r.bottom && b.bottom > r.top;
+            })
+            .map((el) => el.textContent.trim().slice(0, 30));
+        }, QUICK_LINKS_LABEL);
+        summary.checks.quickLinksOverlap[`${viewport.width}x${viewport.height} ${p}`] = hits.length ? hits : 'clear';
+      }
       await ctx.close();
     }
   } catch (e) {

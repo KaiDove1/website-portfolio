@@ -5,9 +5,11 @@
  *   C  achievements (per item: light detail line + bold title line)
  * At xl+ the blocks are pinned to the frame (A near the center, B top-right,
  * C bottom-right): the wrapper becomes `display: contents` so each block
- * positions against the page root. Below xl they flow as one right-aligned column
- * that keeps ~120px clear on the left, so rows that share height with the nav
- * column never run into it (the same compromise the reference makes on phones).
+ * positions against the page root. B starts level with the nav (+125px, the same
+ * offset TitleList uses) so it clears the quick-links icon in the corner. Below xl
+ * they flow as one right-aligned column that keeps ~120px clear on the left, so rows
+ * that share height with the nav column never run into it (the same compromise the
+ * reference makes on phones).
  * Nothing is shown as a heading; each list carries an aria-label from info.headings
  * so screen readers can name the three groups.
  */
@@ -33,7 +35,7 @@ export default function InfoPage() {
 
         <dl
           aria-label={headings.skills}
-          className="max-w-[calc(100%-120px)] leading-normal xl:max-w-[360px] xl:absolute xl:right-[calc(var(--pad)*2)] xl:top-[calc(var(--pad)*2)] xl:text-right"
+          className="max-w-[calc(100%-120px)] leading-normal xl:max-w-[360px] xl:absolute xl:right-[calc(var(--pad)*2)] xl:top-[calc(var(--pad)*2+125px)] xl:text-right"
         >
           {skills.map(({ label, items }) => (
             <div key={label}>

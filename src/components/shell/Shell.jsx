@@ -7,6 +7,7 @@ import NoiseBackground from '../background/NoiseBackground.js';
 import IcosahedronBackground from '../background/IcosahedronBackground.js';
 import SiteHeader from './SiteHeader.jsx';
 import ThemeSwitch from './ThemeSwitch.jsx';
+import QuickLinks from './QuickLinks.jsx';
 import EnterOverlay from './EnterOverlay.jsx';
 import PageOutlet from './PageOutlet.jsx';
 
@@ -17,11 +18,11 @@ import PageOutlet from './PageOutlet.jsx';
  *                       `difference` so white text reads dark on light and light on dark
  *   20 gutter masks     translucent surface strips so scrolled content fades under the gutters
  *   30 frame            the 1px line, 50% white under the same blend
- *   40 header / switch / copyright
+ *   40 header / switch / quick links / copyright
  *   50 enter overlay    the first-load curtain
  * `--pad` is defined once here; every child measures from it.
- * The header and switch come first in the JSX so keyboard users reach the nav before the
- * page content; z-index, not DOM order, decides what paints on top.
+ * The header, switch and quick links come first in the JSX so keyboard users reach the nav
+ * before the page content; z-index, not DOM order, decides what paints on top.
  * The scroller's inner box is a one-cell grid: a grid item stretches to the box's full
  * (min-)height, whereas a plain `min-h-full` child of a min-height-only parent computes
  * to 0 and every absolutely positioned block in the pages would collapse to the top.
@@ -30,10 +31,12 @@ import PageOutlet from './PageOutlet.jsx';
  * Which background class mounts is decided by `BACKGROUND` in src/config.js. The class is
  * created once, told about theme/font changes through setTheme/setStyle, paused while the
  * tab is hidden, and disposed on unmount (StrictMode runs this twice in dev; that is fine).
+ * With 'none' nothing mounts and the frame shows the plain surface color.
  */
 const BACKGROUNDS = {
   noise: NoiseBackground,
   icosahedron: IcosahedronBackground,
+  none: null,
 };
 
 export default function Shell() {
@@ -46,7 +49,7 @@ export default function Shell() {
 
   // Mount the background once; pause it while the tab is hidden.
   useEffect(() => {
-    const Background = BACKGROUNDS[BACKGROUND] ?? BACKGROUNDS.noise;
+    const Background = BACKGROUND in BACKGROUNDS ? BACKGROUNDS[BACKGROUND] : BACKGROUNDS.noise;
     const host = hostRef.current;
     if (!host || !Background) return undefined;
 
@@ -88,6 +91,7 @@ export default function Shell() {
       {/* 40: chrome (first in DOM order so Tab reaches the nav before the page content) */}
       <SiteHeader />
       <ThemeSwitch />
+      <QuickLinks />
 
       {/* 10: blended page layer with the in-frame scroller */}
       <main

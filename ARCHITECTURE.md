@@ -4,12 +4,13 @@
 > structure, and update it in the same commit as any structural change (new page, new dependency,
 > new convention). `CLAUDE.md` tells Claude Code to load this file at the start of every session.
 >
-> Last updated: 2026-10-15 (framed layout complete: shell, five pages, noise shader, light/dark/mono).
+> Last updated: 2026-10-15 (top-right quick links with a GitHub icon; background switched off for now).
 
 ## 1. What this is
 
 A personal portfolio for Kai Dove, built as **one fixed, framed viewport**: the browser window is the outer
-square, a 1px line inset from every edge is the inner square, a WebGL grain field fills it, and the five
+square, a 1px line inset from every edge is the inner square, a WebGL grain field can fill it (switched off for
+now, see §8), and the five
 "pages" (Home, Projects, Experience, Info, Contact) swap *inside* the square. Nothing scrolls except page
 content inside the frame. The layout is modelled on p5aholic.me (Keita Yamada); the code is original.
 
@@ -54,7 +55,7 @@ scripts/screenshots.js         Playwright visual + behaviour harness (see §9)
 src/
   main.jsx                     createRoot + StrictMode. Imports styles/app.css and App
   App.jsx                      <ThemeProvider><Shell /></ThemeProvider>
-  config.js                    BACKGROUND = 'noise' | 'icosahedron'
+  config.js                    BACKGROUND = 'noise' | 'icosahedron' | 'none' (currently 'none')
   hooks/usePage.js             PAGES, usePage() (page id from the URL hash), pageHref(id)
   context/ThemeContext.jsx     theme (light|dark) and font (sans|mono) state → <html data-theme data-font>
   styles/app.css               THE ONLY stylesheet: Tailwind import, color tokens, dark:/mono: variants,
@@ -64,6 +65,7 @@ src/
     shell/Shell.jsx            The fixed framed viewport: layers, background mounting, focus handling
     shell/SiteHeader.jsx       Name, label, vertical nav with the active-page dot (top-left)
     shell/ThemeSwitch.jsx      LIGHT / DARK / MONOSPACED, rotated to read upward in the left gutter
+    shell/QuickLinks.jsx       Icon links top-right inside the frame (site.quickLinks), inline SVG icons
     shell/EnterOverlay.jsx     First-load curtain ("Kai Dove  Portfolio") that fades out
     shell/PageOutlet.jsx       Maps page id → page component, cross-fades on change, resets scroll
     pages/HomePage.jsx         Bio lines pinned bottom-right
@@ -112,7 +114,8 @@ the top on each change. The nav dot moves to the new page.
 │   ┌──────────── frame: 1px line (inner square) ────────────────────────────┐    │
 │   │   canvas host (same inset) → NoiseBackground draws the grain field     │    │
 │   │                                                                        │    │
-│   │   Kai Dove / label / nav   at 2 × --pad          page content          │    │
+│   │   Kai Dove / label / nav   at 2 × --pad     quick-link icons, top-right│    │
+│   │                                                 page content           │    │
 │   │                                             (right-aligned lists,      │    │
 │   │                                              bio or links bottom-right)│    │
 │   └────────────────────────────────────────────────────────────────────────┘    │
@@ -126,7 +129,7 @@ the top on each change. The nav dot moves to the new page.
 | 10 | page layer (`<main>`) | `absolute inset-0 mix-blend-difference text-white`; inside it the scroller `overflow-y-auto overflow-x-hidden scrollbar-none` with a `relative min-h-full grid` inner box |
 | 20 | gutter masks | two `h-(--pad) bg-surface/90` strips, top and bottom, so scrolled content fades under the gutters |
 | 30 | frame | `absolute inset-(--pad) border border-white/50 mix-blend-difference pointer-events-none` |
-| 40 | header, switch, copyright | all `mix-blend-difference text-white` |
+| 40 | header, switch, quick links, copyright | all `mix-blend-difference text-white` |
 | 50 | enter overlay | `fixed inset-0 bg-surface text-ink` |
 
 Rules, and why they exist:
@@ -145,7 +148,9 @@ Rules, and why they exist:
 ## 7. content.json schema
 
 ```
-site:        { name, label, copyright, enter: { name, word }, theme: { light, dark, mono }, labels: { github } }
+site:        { name, label, copyright, enter: { name, word }, theme: { light, dark, mono },
+               labels: { github, quickLinks },                  // quickLinks = the list's aria-label
+               quickLinks: [{ label, href | file, icon }] }     // top-right icons, in display order
 nav:         [{ id: 'home'|'projects'|'experience'|'info'|'contact', label }]
 home:        { bio: string[] }                               // one short line per entry
 projects:    [{ id, name, year: string|null, stack, summary, details[], demoUrl, githubUrl }]
@@ -161,8 +166,14 @@ Rendering rules: a project title links to `demoUrl || githubUrl`; its info line 
 when null) plus a GitHub arrow link when both URLs exist; `summary` and `details` are kept for a future detail
 view and not rendered. `ArrowLink.linkProps()` decides link attributes: `http(s)` → new tab with
 `rel="noopener noreferrer"`, `file` → `import.meta.env.BASE_URL + file` with `download`, `mailto:` → neither.
+Quick links render icon-only: `icon` picks an SVG from `ICONS` in `QuickLinks.jsx`, `label` becomes the link's
+`aria-label`, and an `icon` with no entry falls back to the label as text so a link is never invisible.
 
 ## 8. Background classes
+
+`BACKGROUND` in `src/config.js` picks the class. `'none'` mounts nothing (the canvas host stays empty and the
+frame shows the plain surface); it is the current setting. Three.js is still bundled because both classes are
+imported statically; delete them and the `three` dependency if the background is dropped for good.
 
 Both classes expose the same lifecycle so `Shell` can mount either one:
 
@@ -207,6 +218,9 @@ so the grain shimmers subtly. Pixel ratio is capped at 1.5, there are no render 
 **Components**
 - Function components, default export, folder per role (`shell/`, `pages/`, `ui/`, `background/`), PascalCase `.jsx`.
 - Every page component returns `<div className="relative min-h-full w-full">…</div>` and reads content.json itself.
+- Icons are inline SVG components (`fill="currentColor"`, `aria-hidden`) picked by an `icon` key from content.json
+  through an `ICONS` map; no icon library. They live in `QuickLinks.jsx` until a second component needs them, then
+  move to `ui/`. Brand paths come from Simple Icons (CC0). currentColor is what lets them blend like the text.
 - Accessibility: `aria-current="page"` on the active nav link (which also leaves the tab order while invisible),
   `aria-pressed` on the switch buttons, `aria-label` on lists, a visible `focus-visible` ring on every control.
 
@@ -226,12 +240,14 @@ so the grain shimmers subtly. Pixel ratio is capped at 1.5, there are no render 
 | `npm run dev` | Dev server at <http://localhost:5173/website-portfolio/> |
 | `npm run build` | Production bundle in `dist/` (gitignored) |
 | `npm run preview` | Serves `dist/` locally |
-| `node scripts/screenshots.js [name]` | Builds, serves, screenshots every page in light/dark/mono and phone/tablet sizes into `screenshots/<name>/`, clicks through the nav and switches, and prints a JSON summary. One-time setup: `npm install --no-save playwright && npx playwright install chromium`. |
+| `node scripts/screenshots.js [name]` | Builds, serves, screenshots every page in light/dark/mono and phone/tablet sizes into `screenshots/<name>/`, clicks through the nav and switches, and prints a JSON summary. One-time setup: `npm install --no-save playwright && npx playwright install chromium`. It is an ES module (`import`, not `require`) because package.json sets `"type": "module"`. |
 | `npm run deploy` | Build, then push `dist/` to the `gh-pages` branch. Only when explicitly asked. |
 
-Expected harness checks: one canvas, overlay gone, active nav item invisible (dot shown), `#/projects` after
+Expected harness checks: one canvas (zero while `BACKGROUND = 'none'`), overlay gone, active nav item invisible (dot shown), `#/projects` after
 clicking Projects, dark/mono applied and persisted after clicking, focus reaches the nav after a few Tabs, the
-body never scrolls while the frame does, stored preferences apply on load, one canvas under reduced motion.
+body never scrolls while the frame does, stored preferences apply on load, one canvas under reduced motion (zero
+while `'none'`), the quick link opens in a new tab, and `quickLinksOverlap` reads `clear` for every page at
+1440×900, 1280×720 and 390×844.
 
 `base: '/website-portfolio/'` in `vite.config.js` is what makes the subdirectory work. Three.js makes the main
 chunk about 775 KB minified (210 KB gzipped); the noise shader uses only a sliver of the library, so a later
@@ -246,6 +262,8 @@ optimisation is to render it with raw WebGL and drop `three` entirely.
 | Five pages from content.json | Done 2026-10-15 |
 | Original grain-field shader, light/dark/mono | Done 2026-10-15 |
 | Screenshot harness and behaviour checks | Done 2026-10-15 |
+| Top-right quick links (GitHub icon) | Done 2026-10-15 |
+| More socials / cool things in `site.quickLinks` (each needs an SVG in `ICONS`) | Owner |
 | Fill in `year` for MedQuery, Beli, Investiverse in content.json | Owner |
 | Decide whether `inspiration.md` is committed or ignored | Owner |
 | Delete unused `src/assets/*` and the leftover `.env` files | Owner |
@@ -265,6 +283,11 @@ optimisation is to render it with raw WebGL and drop `three` entirely.
 - **2026-10-15. Contact is links only.** The EmailJS form was dropped to match the reference's minimal contact page.
 - **2026-10-15. Monospaced mode** switches the whole site to JetBrains Mono and tells the shader to quantize its field.
 - **2026-10-15. Theme follows the OS until the visitor chooses.** Nothing is persisted on first visit.
+- **2026-10-15. Background switched off for now** (`BACKGROUND = 'none'`). Kai wanted a plain frame; the shader
+  classes stay in the repo so switching back is one line.
+- **2026-10-15. Quick links: icons only, top-right inside the frame, GitHub first.** Kai chose this over text in the
+  top gutter. The Info page's skills block moved down to nav level at xl (+125px, the TitleList offset) to clear the
+  corner. Scrolled titles may pass under the icon, the same way they pass under the name.
 
 ## 14. Known gaps
 

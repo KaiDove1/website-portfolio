@@ -5,7 +5,10 @@
     "copyright": "© Kai Dove",
     "enter": { "name": "Kai Dove", "word": "Portfolio" },
     "theme": { "light": "Light", "dark": "Dark", "mono": "Monospaced" },
-    "labels": { "github": "GitHub" }
+    "labels": { "github": "GitHub", "quickLinks": "Quick links" },
+    "quickLinks": [
+      { "label": "GitHub", "href": "https://github.com/KaiDove1", "icon": "github" }
+    ]
   },
 
   "nav": [
