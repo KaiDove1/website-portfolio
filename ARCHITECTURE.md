@@ -4,7 +4,7 @@
 > structure, and update it in the same commit as any structural change (new page, new dependency,
 > new convention). `CLAUDE.md` tells Claude Code to load this file at the start of every session.
 >
-> Last updated: 2026-10-15 (top-right quick links with a GitHub icon; background switched off for now).
+> Last updated: 2026-10-16 (first deploy from `redesign`; top-right GitHub quick link; background switched off).
 
 ## 1. What this is
 
@@ -22,8 +22,8 @@ the `/website-portfolio/` base path (see §9).
 
 | Branch | State |
 |---|---|
-| `main` | The legacy Create React App site. Still deployed. Frozen. |
-| `redesign` | The v3 rebuild described here. Replaces `main` once deployed. |
+| `main` | The legacy Create React App site. Frozen. No longer deployed since 2026-10-16; waiting for the merge from `redesign`. |
+| `redesign` | The v3 rebuild described here. Live on GitHub Pages since 2026-10-16; merges into `main` next. |
 | `gh-pages` | Build artifact pushed by `npm run deploy`. Never edit by hand. |
 | `master`, `old-version`, `WIP` | Historical. Ignore. |
 
@@ -267,7 +267,8 @@ optimisation is to render it with raw WebGL and drop `three` entirely.
 | Fill in `year` for MedQuery, Beli, Investiverse in content.json | Owner |
 | Decide whether `inspiration.md` is committed or ignored | Owner |
 | Delete unused `src/assets/*` and the leftover `.env` files | Owner |
-| `npm run deploy` from `redesign`, then merge into `main` | When Kai says so |
+| First `npm run deploy` from `redesign` | Done 2026-10-16 |
+| Merge `redesign` into `main` | When Kai says so |
 | Optional: project detail view using `summary`/`details`; drop Three.js for raw WebGL | Later |
 
 ## 13. Decision log

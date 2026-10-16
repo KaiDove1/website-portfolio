@@ -11,8 +11,8 @@ files, update `ARCHITECTURE.md` in the same change. Do not duplicate its content
 ## Branch note
 
 `redesign` is the v3 rebuild (Vite + React 19 + Tailwind v4, framed single-viewport layout) that
-`ARCHITECTURE.md` describes. `main` still holds the legacy Create React App site and is what is deployed;
-its own `CLAUDE.md` describes that version.
+`ARCHITECTURE.md` describes, and the live site has been built from it since 2026-10-16. `main` still holds
+the legacy Create React App site (its own `CLAUDE.md` describes it) until `redesign` is merged into it.
 
 ## Commands
 
