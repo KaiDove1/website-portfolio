@@ -31,3 +31,6 @@ tmpclaude-*
 
 # local visual-check output (scripts/screenshots.js)
 /screenshots
+
+# personal files kept on this machine only (e.g. resume source)
+/private
