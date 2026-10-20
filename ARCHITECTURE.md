@@ -4,13 +4,13 @@
 > structure, and update it in the same commit as any structural change (new page, new dependency,
 > new convention). `CLAUDE.md` tells Claude Code to load this file at the start of every session.
 >
-> Last updated: 2026-10-16 (first deploy from `redesign`; top-right GitHub quick link; background switched off).
+> Last updated: 2026-10-19 (glitch background on; project summaries and screenshot previews on hover; NOK108 Matcha added, Investiverse removed).
 
 ## 1. What this is
 
 A personal portfolio for Kai Dove, built as **one fixed, framed viewport**: the browser window is the outer
-square, a 1px line inset from every edge is the inner square, a WebGL grain field can fill it (switched off for
-now, see §8), and the five
+square, a 1px line inset from every edge is the inner square, a WebGL background fills it (currently the glitch
+scanline orb, see §8), and the five
 "pages" (Home, Projects, Experience, Info, Contact) swap *inside* the square. Nothing scrolls except page
 content inside the frame. The layout is modelled on p5aholic.me (Keita Yamada); the code is original.
 
@@ -36,12 +36,12 @@ Old components are still useful as content references: `git show main:src/compon
 | Build / dev server | Vite 8 | Create React App is retired; Vite starts instantly and needs one config line. |
 | UI | React 19, function components + hooks | Known already; a one-screen site needs nothing heavier (Next/Astro were considered and rejected). |
 | Styling | Tailwind CSS v4 (utility classes in JSX) with tokens in `@theme` | Markup and styling in one file, no jumping between JSX and CSS. Tokens stay in one place. |
-| Background | Three.js 0.186, one full-screen fragment shader | Original GLSL stippled-grain field (`NoiseBackground.js`); the old wireframe is kept as an alternative. |
+| Background | Three.js 0.186, one full-screen fragment shader | Original GLSL: the glitch scanline orb (`GlitchBackground.js`, current) or the stippled-grain field (`NoiseBackground.js`); the old wireframe is kept as an alternative. |
 | Type | Inter 200/300/400/600 and JetBrains Mono 200/400/600 from Google Fonts | Free; Inter is the closest free geometric sans to the reference, JetBrains Mono powers "Monospaced" mode. |
 | Deploy | `gh-pages` package to GitHub Pages | Same as before; free, no server. |
 | Visual checks | Playwright script in `scripts/` (not a dependency) | Screenshots every page/mode and runs behaviour checks; see §9. |
 
-Design reference notes and measurements: `inspiration.md`, section 3 (kept local, not committed).
+Design reference notes and measurements: `inspiration.md`, section 3.
 
 ## 4. Repository layout
 
@@ -50,14 +50,15 @@ index.html                     Vite entry: meta, pre-paint script that applies t
                                <div id="root">, loads src/main.jsx
 vite.config.js                 React plugin + Tailwind plugin + base: '/website-portfolio/'
 package.json                   scripts: dev, build, preview, deploy
-public/                        Copied verbatim into dist/: resume.pdf, images/
+public/                        Copied verbatim into dist/: resume.pdf, images/ (project preview screenshots, WebP)
 scripts/screenshots.js         Playwright visual + behaviour harness (see §9)
 src/
   main.jsx                     createRoot + StrictMode. Imports styles/app.css and App
   App.jsx                      <ThemeProvider><Shell /></ThemeProvider>
-  config.js                    BACKGROUND = 'noise' | 'icosahedron' | 'none' (currently 'none')
+  config.js                    BACKGROUND = 'glitch' | 'noise' | 'icosahedron' | 'none' (currently 'glitch')
   hooks/usePage.js             PAGES, usePage() (page id from the URL hash), pageHref(id)
   context/ThemeContext.jsx     theme (light|dark) and font (sans|mono) state → <html data-theme data-font>
+  context/PreviewContext.jsx   hands Shell's preview setter to pages (useSetPreview)
   styles/app.css               THE ONLY stylesheet: Tailwind import, color tokens, dark:/mono: variants,
                                @theme block, base rules, scrollbar-none utility
   content/content.json         All copy and data (§6). Components never hardcode text
@@ -68,13 +69,15 @@ src/
     shell/QuickLinks.jsx       Icon links top-right inside the frame (site.quickLinks), inline SVG icons
     shell/EnterOverlay.jsx     First-load curtain ("Kai Dove  Portfolio") that fades out
     shell/PageOutlet.jsx       Maps page id → page component, cross-fades on change, resets scroll
+    shell/PreviewLayer.jsx     Hovered project's screenshot, bottom-left in the frame, outside the blend
     pages/HomePage.jsx         Bio lines pinned bottom-right
     pages/ProjectsPage.jsx     Big-title list (also exports TitleList, shared with Experience)
     pages/ExperiencePage.jsx   Same list for work + education
     pages/InfoPage.jsx         Links, skills, achievements (three pinned blocks at xl, one column below)
     pages/ContactPage.jsx      Arrow links pinned bottom-right
     ui/ArrowLink.jsx           "{label} ↗" link + linkProps() (external / file / mailto rules)
-    background/NoiseBackground.js        Grain-field shader (default)
+    background/GlitchBackground.js       Scanline orb that tears and RGB-splits in bursts (current); extends NoiseBackground
+    background/NoiseBackground.js        Grain-field shader; also the shared lifecycle and NOISE_GLSL helpers
     background/IcosahedronBackground.js  Rotating wireframe (alternative)
   assets/                      Leftover images from the old site; nothing imports them (safe to delete)
 ARCHITECTURE.md, CLAUDE.md     This file and the short rules for Claude Code
@@ -112,7 +115,7 @@ the top on each change. The nav dot moves to the new page.
 ┌──────────────────── viewport = Shell root (fixed inset-0) ──────────────────────┐
 │ ← --pad →                                                                       │
 │   ┌──────────── frame: 1px line (inner square) ────────────────────────────┐    │
-│   │   canvas host (same inset) → NoiseBackground draws the grain field     │    │
+│   │   canvas host (same inset) → the config.js background draws here      │    │
 │   │                                                                        │    │
 │   │   Kai Dove / label / nav   at 2 × --pad     quick-link icons, top-right│    │
 │   │                                                 page content           │    │
@@ -127,7 +130,8 @@ the top on each change. The nav dot moves to the new page.
 |---|---|---|
 | 0 | canvas host | `absolute inset-(--pad) *:size-full` |
 | 10 | page layer (`<main>`) | `absolute inset-0 mix-blend-difference text-white`; inside it the scroller `overflow-y-auto overflow-x-hidden scrollbar-none` with a `relative min-h-full grid` inner box |
-| 20 | gutter masks | two `h-(--pad) bg-surface/90` strips, top and bottom, so scrolled content fades under the gutters |
+| 15 | preview layer | `absolute left/bottom-[calc(var(--pad)*2)] w-[min(30vw,520px)] hidden xl:block pointer-coarse:hidden`, no blend so photos keep their colors |
+| 20 | gutter masks | two opaque `h-(--pad) bg-surface` strips, top and bottom, so scrolled content never shows in the gutters |
 | 30 | frame | `absolute inset-(--pad) border border-white/50 mix-blend-difference pointer-events-none` |
 | 40 | header, switch, quick links, copyright | all `mix-blend-difference text-white` |
 | 50 | enter overlay | `fixed inset-0 bg-surface text-ink` |
@@ -153,7 +157,8 @@ site:        { name, label, copyright, enter: { name, word }, theme: { light, da
                quickLinks: [{ label, href | file, icon }] }     // top-right icons, in display order
 nav:         [{ id: 'home'|'projects'|'experience'|'info'|'contact', label }]
 home:        { bio: string[] }                               // one short line per entry
-projects:    [{ id, name, year: string|null, stack, summary, details[], demoUrl, githubUrl }]
+projects:    [{ id, name, year: string|null, stack, summary, preview?, details[], demoUrl, githubUrl }]
+                                                             // preview = image path in public/
 experience:  [{ title, org, period, kind: 'work'|'education' }]   // newest first
 info:        { headings: { links, skills, achievements },    // aria-labels only, never shown
                links: [{ label, href } | { label, file, download }],
@@ -163,28 +168,43 @@ contact:     { links: [{ label, href }] }
 ```
 
 Rendering rules: a project title links to `demoUrl || githubUrl`; its info line is `year / stack` (year omitted
-when null) plus a GitHub arrow link when both URLs exist; `summary` and `details` are kept for a future detail
-view and not rendered. `ArrowLink.linkProps()` decides link attributes: `http(s)` → new tab with
+when null) plus a GitHub arrow link when both URLs exist; `details` is kept for a future detail
+view and not rendered. A project's `summary` is passed to `TitleList` as `note` and opens under the info line on
+hover or keyboard focus (always open on touch screens, via `pointer-coarse:`). On the same hover/focus a `preview`
+image is shown by `PreviewLayer` (xl and fine pointers only), cleared on leave, blur and page change. `ArrowLink.linkProps()` decides link attributes: `http(s)` → new tab with
 `rel="noopener noreferrer"`, `file` → `import.meta.env.BASE_URL + file` with `download`, `mailto:` → neither.
 Quick links render icon-only: `icon` picks an SVG from `ICONS` in `QuickLinks.jsx`, `label` becomes the link's
 `aria-label`, and an `icon` with no entry falls back to the label as text so a link is never invisible.
 
 ## 8. Background classes
 
-`BACKGROUND` in `src/config.js` picks the class. `'none'` mounts nothing (the canvas host stays empty and the
-frame shows the plain surface); it is the current setting. Three.js is still bundled because both classes are
+`BACKGROUND` in `src/config.js` picks the class; `'glitch'` is the current setting. `'none'` mounts nothing (the
+canvas host stays empty and the frame shows the plain surface). Three.js is bundled because the classes are
 imported statically; delete them and the `three` dependency if the background is dropped for good.
 
-Both classes expose the same lifecycle so `Shell` can mount either one:
+`GlitchBackground` extends `NoiseBackground` and overrides only `fragmentShader()`, so the lifecycle, resizing,
+uniforms (`uTime`, `uResolution`, `uDark`, `uStyle`, `uSeed`, `uGrain`) and disposal live in one place. The hash,
+value-noise and fbm GLSL is exported from `NoiseBackground.js` as `NOISE_GLSL` and spliced into both shaders.
+
+All classes expose the same lifecycle so `Shell` can mount any of them:
 
 | Method | Does |
 |---|---|
 | `new X(containerEl)` | Binds handlers once so `dispose` removes the same references. |
 | `init()` | Creates the renderer and canvas inside the container, observes the container with `ResizeObserver`, draws one frame, starts the loop. Guards double init and missing WebGL (frame stays empty). |
-| `setTheme(isDark)` | Recolors. Noise: dark-grey dots on light, light-grey on dark. Wireframe: `0x666666`/`0xcccccc`. |
-| `setStyle(isMono)` | Noise: samples the field on a 50×50 grid for a blocky look. Wireframe: no-op. |
+| `setTheme(isDark)` | Recolors. Glitch: theme ink over surface per channel. Noise: dark-grey dots on light, light-grey on dark. Wireframe: `0x666666`/`0xcccccc`. |
+| `setStyle(isMono)` | Glitch: bar ends snap to a column grid, no colour split. Noise: samples the field on a 50×50 grid. Wireframe: no-op. |
 | `start()` / `stop()` | rAF loop control; `start` is idempotent; never runs under `prefers-reduced-motion` (one static frame instead). |
 | `dispose()` | Cancels rAF, disconnects observers, disposes GPU objects, forces context loss, removes the canvas. |
+
+**How the glitch orb works** (plain-language notes at the top of `GlitchBackground.js`): the frame is cut into
+6px rows, each half bar and half gap; bar lengths follow a round envelope (centre about 40 % across, 52 % down,
+radius 0.36 of the shorter side) stretched and swayed by slow value noise and broken into segments, so the rows
+read as an orb made of scanlines. Time is cut into 0.1 s slots and about 14 % of slots are bursts: bands of rows
+tear sideways, red and blue are sampled further apart (chromatic split), and a few square cells (10 per short side)
+flash as scanlined slabs. A soft tracking band rolls down every 9 s and a sparse speckle reseeds 12×/s. Coverage
+is capped at 30 % ink so the difference-blended text stays legible; the surface/ink greys are mirrored from
+`app.css` because WebGL cannot read CSS variables.
 
 **How the noise field works** (explained in plain language at the top of `NoiseBackground.js`): one full-screen
 quad; for every pixel the shader computes a *density* from a large feathered disc (centre near 75 % across and
@@ -243,7 +263,8 @@ so the grain shimmers subtly. Pixel ratio is capped at 1.5, there are no render 
 | `node scripts/screenshots.js [name]` | Builds, serves, screenshots every page in light/dark/mono and phone/tablet sizes into `screenshots/<name>/`, clicks through the nav and switches, and prints a JSON summary. One-time setup: `npm install --no-save playwright && npx playwright install chromium`. It is an ES module (`import`, not `require`) because package.json sets `"type": "module"`. |
 | `npm run deploy` | Build, then push `dist/` to the `gh-pages` branch. Only when explicitly asked. |
 
-Expected harness checks: one canvas (zero while `BACKGROUND = 'none'`), overlay gone, active nav item invisible (dot shown), `#/projects` after
+Expected harness checks: one canvas (zero while `BACKGROUND = 'none'`; WebGL "GPU stall due to ReadPixels" console
+warnings come from the screenshots themselves and are harmless), overlay gone, active nav item invisible (dot shown), `#/projects` after
 clicking Projects, dark/mono applied and persisted after clicking, focus reaches the nav after a few Tabs, the
 body never scrolls while the frame does, stored preferences apply on load, one canvas under reduced motion (zero
 while `'none'`), the quick link opens in a new tab, and `quickLinksOverlap` reads `clear` for every page at
@@ -264,8 +285,8 @@ optimisation is to render it with raw WebGL and drop `three` entirely.
 | Screenshot harness and behaviour checks | Done 2026-10-15 |
 | Top-right quick links (GitHub icon) | Done 2026-10-15 |
 | More socials / cool things in `site.quickLinks` (each needs an SVG in `ICONS`) | Owner |
-| Fill in `year` for MedQuery, Beli, Investiverse in content.json | Owner |
-| Decide whether `inspiration.md` is committed or ignored | Owner |
+| Fill in `year` for MedQuery and Beli in content.json | Owner |
+| Decide whether `inspiration.md` is committed or ignored | Committed 2026-10-18 |
 | Delete unused `src/assets/*` and the leftover `.env` files | Owner |
 | First `npm run deploy` from `redesign` | Done 2026-10-16 |
 | Merge `redesign` into `main` | When Kai says so |
@@ -289,10 +310,22 @@ optimisation is to render it with raw WebGL and drop `three` entirely.
 - **2026-10-15. Quick links: icons only, top-right inside the frame, GitHub first.** Kai chose this over text in the
   top gutter. The Info page's skills block moved down to nav level at xl (+125px, the TitleList offset) to clear the
   corner. Scrolled titles may pass under the icon, the same way they pass under the name.
+- **2026-10-18. Project summaries open on hover, inline under the info line.** Kai wanted a short preview of what a
+  project is without leaving the site. Inline (grid rows 0fr → 1fr) was chosen over a floating tooltip because it
+  needs no positioning and works with keyboard focus; touch screens show every summary since they cannot hover.
+- **2026-10-18. Screenshot previews in their own unblended layer.** Inside the `difference`-blended page layer a photo
+  renders as a negative, so the image sits at z 15 in the Shell, fed through `PreviewContext`, pinned in the empty
+  bottom-left of the frame. A static screenshot (Kai supplied nok108.com's front page) rather than a live iframe:
+  light, fast, and immune to sites that refuse framing. Retake it when that site's front page changes.
+- **2026-10-18. Gutter masks fully opaque** (were 90 %). Kai did not want scrolled titles faintly visible in the
+  gutters; content now disappears cleanly at the frame line.
+- **2026-10-19. Background back on, as an original glitch shader.** Kai asked for "some cool abstract glitchy thing in
+  the back". A scanline orb with burst tearing, RGB split and block corruption, capped at 30 % ink for legibility.
+  It subclasses `NoiseBackground` instead of copying its lifecycle; the grain field stays one config switch away.
 
 ## 14. Known gaps
 
-- Project `year` is null for three projects, so their info line shows only the stack.
+- Project `year` is null for two projects (MedQuery, Beli), so their info line shows only the stack.
 - `src/assets/*` (four files) and `.env` / `.env.example` are unused leftovers awaiting deletion.
 - GitHub and LeetCode live stats from the old site are not part of v3; the numbers live as text in `info.achievements`.
 - No automated unit tests; verification is the screenshot harness plus manual checks in the browser.

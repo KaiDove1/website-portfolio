@@ -24,6 +24,8 @@ import * as THREE from 'three';
  * All noise and hash functions below are written by hand; nothing is imported.
  * The class exposes the same lifecycle as IcosahedronBackground:
  * init / setTheme / setStyle / start / stop / dispose.
+ * Subclasses (GlitchBackground) reuse all of it and only override fragmentShader(); the
+ * shader receives the uniforms listed at the top of FRAGMENT_SHADER.
  */
 
 const VERTEX_SHADER = /* glsl */ `
@@ -33,22 +35,8 @@ const VERTEX_SHADER = /* glsl */ `
   }
 `;
 
-const FRAGMENT_SHADER = /* glsl */ `
-  uniform float uTime;        // seconds since init
-  uniform vec2  uResolution;  // drawing-buffer size in device pixels
-  uniform float uDark;        // 0 = light theme, 1 = dark theme
-  uniform float uStyle;       // 0 = smooth field, 1 = quantized (mono) field
-  uniform float uSeed;        // per-instance offset so reloads differ
-  uniform float uGrain;       // grain cell size in device pixels (1.0 to 1.5)
-
-  // Density tuning. The reference reads as a sparse grey stipple that text stays legible
-  // over; at 0.55 coverage with near-opaque dots the band turned solid at 1x pixel ratio.
-  const float MAX_COVERAGE = 0.32;  // share of pixels painted at the densest spot (the rim)
-  const float ALPHA_MIN = 0.35;     // dot opacity where the field is thinnest...
-  const float ALPHA_MAX = 0.60;     // ...and at the densest spot (grey, never solid)
-  const float DRIFT_PERIOD = 75.0;  // seconds for one full drift cycle
-  const float SHIMMER_RATE = 12.0;  // grain reseeds per second
-
+// Hand-written hash, value-noise and fbm helpers, shared with GlitchBackground.
+export const NOISE_GLSL = /* glsl */ `
   // Hash: scramble a 2D coordinate into a pseudo-random number in [0, 1).
   // Inputs are first scaled down so large pixel coordinates keep their float precision.
   float hash21(vec2 p) {
@@ -87,7 +75,25 @@ const FRAGMENT_SHADER = /* glsl */ `
     }
     return sum / 0.875; // normalise to roughly [0, 1]
   }
+`;
 
+const FRAGMENT_SHADER = /* glsl */ `
+  uniform float uTime;        // seconds since init
+  uniform vec2  uResolution;  // drawing-buffer size in device pixels
+  uniform float uDark;        // 0 = light theme, 1 = dark theme
+  uniform float uStyle;       // 0 = smooth field, 1 = quantized (mono) field
+  uniform float uSeed;        // per-instance offset so reloads differ
+  uniform float uGrain;       // grain cell size in device pixels (1.0 to 1.5)
+
+  // Density tuning. The reference reads as a sparse grey stipple that text stays legible
+  // over; at 0.55 coverage with near-opaque dots the band turned solid at 1x pixel ratio.
+  const float MAX_COVERAGE = 0.32;  // share of pixels painted at the densest spot (the rim)
+  const float ALPHA_MIN = 0.35;     // dot opacity where the field is thinnest...
+  const float ALPHA_MAX = 0.60;     // ...and at the densest spot (grey, never solid)
+  const float DRIFT_PERIOD = 75.0;  // seconds for one full drift cycle
+  const float SHIMMER_RATE = 12.0;  // grain reseeds per second
+
+${NOISE_GLSL}
   void main() {
     vec2 res = uResolution;
     float shortSide = min(res.x, res.y);
@@ -192,7 +198,7 @@ class NoiseBackground {
     this.geometry = new THREE.PlaneGeometry(2, 2);
     this.material = new THREE.ShaderMaterial({
       vertexShader: VERTEX_SHADER,
-      fragmentShader: FRAGMENT_SHADER,
+      fragmentShader: this.fragmentShader(),
       uniforms: {
         uTime: { value: 0 },
         uResolution: { value: new THREE.Vector2(1, 1) },
@@ -221,6 +227,11 @@ class NoiseBackground {
 
     this.renderFrame(); // Always draw one frame, even when motion is reduced.
     this.start();
+  }
+
+  // The GLSL source for the full-screen pass; subclasses return their own.
+  fragmentShader() {
+    return FRAGMENT_SHADER;
   }
 
   setTheme(isDark) {

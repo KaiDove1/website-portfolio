@@ -33,6 +33,20 @@
 
   "projects": [
     {
+      "id": "nok108",
+      "name": "NOK108 Matcha",
+      "year": "2025",
+      "stack": "Next.js, TypeScript, PostgreSQL, Vercel",
+      "summary": "A Charlottesville matcha company I co-founded, serving 7,000+ drinks a month. I built its website, staff dashboard and an AI tool that cut ingredient costs about 15%.",
+      "details": [
+        "Built nok108.com and a staff dashboard (Next.js 15, React 19, TypeScript, PostgreSQL/Drizzle, Auth.js, Vercel) with a public schedule, menu, catering inquiries, and an auth-protected admin for scheduling and earnings import.",
+        "Built an AI sourcing tool (Python/pandas, Claude and OpenAI APIs) that parses receipts and invoices with an LLM to track per-ingredient cost, forecasts per-event demand, and compares local grocery prices to generate the cheapest shopping list; cut ingredient costs about 15%."
+      ],
+      "preview": "images/nok108-preview.webp",
+      "demoUrl": "https://nok108.com",
+      "githubUrl": ""
+    },
+    {
       "id": "medquery",
       "name": "MedQuery",
       "year": null,
@@ -101,25 +115,12 @@
       ],
       "demoUrl": "https://kaidove1.github.io/website-portfolio",
       "githubUrl": "https://github.com/KaiDove1/website-portfolio"
-    },
-    {
-      "id": "investiverse",
-      "name": "Investiverse",
-      "year": null,
-      "stack": "PHP, JavaScript, PostgreSQL, Docker",
-      "summary": "Full-stack stock learning platform with a real-time market simulator.",
-      "details": [
-        "Architected full-stack fintech platform using a PHP backend, PostgreSQL database, and Docker containerization. Implemented real-time stock market simulator with WebSocket connections handling concurrent user requests.",
-        "Built OAuth 2.0 authentication system with JWT session management and role-based access control (RBAC). Optimized database queries with indexing.",
-        "Engineered responsive dashboards with Chart.js visualizations and community forums using AJAX, with gamified investment challenges and peer-to-peer learning features."
-      ],
-      "demoUrl": "",
-      "githubUrl": "https://github.com/KaiDove1/investiverse"
     }
   ],
 
   "experience": [
-    { "title": "Junior Software Developer", "org": "LionPro.AI (Lion Federal)", "period": "Aug 2025 – Present", "kind": "work" },
+    { "title": "Co-founder", "org": "NOK108 Matcha", "period": "Oct 2025 – Present", "kind": "work" },
+    { "title": "Junior Software Developer", "org": "LionPro.AI (Lion Federal)", "period": "Aug 2025 – Mar 2026", "kind": "work" },
     { "title": "Software Engineer Intern", "org": "Lion Federal", "period": "May 2025 – Aug 2025", "kind": "work" },
     { "title": "Teaching Assistant", "org": "University of Virginia, Advanced Software Engineering", "period": "Aug 2024 – May 2026", "kind": "work" },
     { "title": "Software Engineer Intern", "org": "Electric On Ramp", "period": "May 2024 – Aug 2024", "kind": "work" },

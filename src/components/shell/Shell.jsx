@@ -2,21 +2,25 @@ import { useEffect, useRef, useState } from 'react';
 import { BACKGROUND } from '../../config.js';
 import content from '../../content/content.json';
 import { useTheme } from '../../context/ThemeContext';
+import { PreviewProvider } from '../../context/PreviewContext.jsx';
 import { usePage } from '../../hooks/usePage';
 import NoiseBackground from '../background/NoiseBackground.js';
 import IcosahedronBackground from '../background/IcosahedronBackground.js';
+import GlitchBackground from '../background/GlitchBackground.js';
 import SiteHeader from './SiteHeader.jsx';
 import ThemeSwitch from './ThemeSwitch.jsx';
 import QuickLinks from './QuickLinks.jsx';
 import EnterOverlay from './EnterOverlay.jsx';
 import PageOutlet from './PageOutlet.jsx';
+import PreviewLayer from './PreviewLayer.jsx';
 
 /**
  * The fixed, framed viewport everything lives in. Layers, bottom to top:
  *   0  canvas host      the WebGL background, inset by --pad (same box as the frame)
  *   10 page layer       the in-frame scroller holding the current page; blended with
  *                       `difference` so white text reads dark on light and light on dark
- *   20 gutter masks     translucent surface strips so scrolled content fades under the gutters
+ *   15 preview layer    a hovered project's screenshot, unblended (PreviewLayer.jsx)
+ *   20 gutter masks    opaque surface strips so scrolled content never shows in the gutters
  *   30 frame            the 1px line, 50% white under the same blend
  *   40 header / switch / quick links / copyright
  *   50 enter overlay    the first-load curtain
@@ -35,6 +39,7 @@ import PageOutlet from './PageOutlet.jsx';
  */
 const BACKGROUNDS = {
   noise: NoiseBackground,
+  glitch: GlitchBackground,
   icosahedron: IcosahedronBackground,
   none: null,
 };
@@ -46,6 +51,7 @@ export default function Shell() {
   const scrollerRef = useRef(null);
   const bgRef = useRef(null);
   const [ready, setReady] = useState(false);
+  const [preview, setPreview] = useState(null);
 
   // Mount the background once; pause it while the tab is hidden.
   useEffect(() => {
@@ -105,19 +111,24 @@ export default function Shell() {
           className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-none overscroll-contain outline-none"
         >
           <div className="relative min-h-full grid">
-            <PageOutlet page={page} scrollerRef={scrollerRef} />
+            <PreviewProvider value={setPreview}>
+              <PageOutlet page={page} scrollerRef={scrollerRef} />
+            </PreviewProvider>
           </div>
         </div>
       </main>
 
+      {/* 15: hovered project's screenshot, outside the blend */}
+      <PreviewLayer src={preview} />
+
       {/* 20: gutter masks */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 right-0 top-0 h-(--pad) bg-surface/90 z-20 transition-colors duration-[900ms] ease-smooth"
+        className="pointer-events-none absolute left-0 right-0 top-0 h-(--pad) bg-surface z-20 transition-colors duration-[900ms] ease-smooth"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 right-0 bottom-0 h-(--pad) bg-surface/90 z-20 transition-colors duration-[900ms] ease-smooth"
+        className="pointer-events-none absolute left-0 right-0 bottom-0 h-(--pad) bg-surface z-20 transition-colors duration-[900ms] ease-smooth"
       />
 
       {/* 30: the frame */}
